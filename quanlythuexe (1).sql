@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost:3307
--- Thời gian đã tạo: Th10 14, 2021 lúc 08:31 AM
+-- Thời gian đã tạo: Th10 15, 2021 lúc 08:24 AM
 -- Phiên bản máy phục vụ: 10.4.19-MariaDB
 -- Phiên bản PHP: 8.0.6
 
@@ -24,91 +24,92 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `brands`
+-- Cấu trúc bảng cho bảng `nguoidung`
 --
 
-CREATE TABLE `brands` (
+CREATE TABLE `nguoidung` (
   `id` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `name` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `nation` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `ten` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `diachi` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `gioitinh` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `id_card` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `sodienthoai` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `quyen_id` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `quyen`
+--
+
+CREATE TABLE `quyen` (
+  `id` int(1) NOT NULL,
+  `tenquyen` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `mota` varchar(40) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `thuexe`
+--
+
+CREATE TABLE `thuexe` (
+  `id` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `sodienthoai` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `ten` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `nsd_id` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `xe_id` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `batdau` date NOT NULL,
+  `ketthuc` date NOT NULL,
+  `vitri` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `trangthai` varchar(10) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `thuonghieu`
+--
+
+CREATE TABLE `thuonghieu` (
+  `id` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `tenth` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `quocgia` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   `logo` varchar(100) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `car`
+-- Cấu trúc bảng cho bảng `trangthai`
 --
 
-CREATE TABLE `car` (
-  `id` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `ownerid` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `name` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `carNumberPlate` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `statusid` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
-  `rentcost` int(20) NOT NULL,
-  `postdated` date NOT NULL,
-  `brandid` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `Fuel` varchar(10) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `roles`
---
-
-CREATE TABLE `roles` (
-  `name` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `description` varchar(40) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `status`
---
-
-CREATE TABLE `status` (
-  `name` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+CREATE TABLE `trangthai` (
+  `ten` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   `code` varchar(2) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `usercar`
+-- Cấu trúc bảng cho bảng `xe`
 --
 
-CREATE TABLE `usercar` (
-  `email` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `fullname` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `userid` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `carid` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `startdate` date NOT NULL,
-  `enddate` date NOT NULL,
-  `route` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `receive` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `status` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `Fuel` varchar(10) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `users`
---
-
-CREATE TABLE `users` (
+CREATE TABLE `xe` (
   `id` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `fullname` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `adress` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `gender` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `idcard` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `phonenumber` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `role_id` int(1) NOT NULL
+  `csh_id` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `tenxe` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `bienso` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `trangthai_id` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
+  `giathue` int(20) NOT NULL,
+  `ngaythue` date NOT NULL,
+  `th_id` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
+  `loainhienlieu` varchar(10) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -116,47 +117,69 @@ CREATE TABLE `users` (
 --
 
 --
--- Chỉ mục cho bảng `brands`
+-- Chỉ mục cho bảng `nguoidung`
 --
-ALTER TABLE `brands`
-  ADD PRIMARY KEY (`id`);
-
---
--- Chỉ mục cho bảng `car`
---
-ALTER TABLE `car`
+ALTER TABLE `nguoidung`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`ownerid`);
+  ADD KEY `quyen_id` (`quyen_id`);
 
 --
--- Chỉ mục cho bảng `usercar`
+-- Chỉ mục cho bảng `quyen`
 --
-ALTER TABLE `usercar`
-  ADD PRIMARY KEY (`userid`,`carid`),
-  ADD KEY `car_id` (`carid`);
-
---
--- Chỉ mục cho bảng `users`
---
-ALTER TABLE `users`
+ALTER TABLE `quyen`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `thuexe`
+--
+ALTER TABLE `thuexe`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `nsd_id` (`nsd_id`),
+  ADD KEY `xe_id` (`xe_id`);
+
+--
+-- Chỉ mục cho bảng `thuonghieu`
+--
+ALTER TABLE `thuonghieu`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `trangthai`
+--
+ALTER TABLE `trangthai`
+  ADD PRIMARY KEY (`code`);
+
+--
+-- Chỉ mục cho bảng `xe`
+--
+ALTER TABLE `xe`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `csh_xe` (`csh_id`),
+  ADD KEY `th_id` (`th_id`);
 
 --
 -- Các ràng buộc cho các bảng đã đổ
 --
 
 --
--- Các ràng buộc cho bảng `car`
+-- Các ràng buộc cho bảng `nguoidung`
 --
-ALTER TABLE `car`
-  ADD CONSTRAINT `user_id` FOREIGN KEY (`ownerid`) REFERENCES `users` (`id`);
+ALTER TABLE `nguoidung`
+  ADD CONSTRAINT `quyen_id` FOREIGN KEY (`quyen_id`) REFERENCES `quyen` (`id`);
 
 --
--- Các ràng buộc cho bảng `usercar`
+-- Các ràng buộc cho bảng `thuexe`
 --
-ALTER TABLE `usercar`
-  ADD CONSTRAINT `car_id` FOREIGN KEY (`carid`) REFERENCES `car` (`id`),
-  ADD CONSTRAINT `use_id` FOREIGN KEY (`userid`) REFERENCES `users` (`id`);
+ALTER TABLE `thuexe`
+  ADD CONSTRAINT `nsd_id` FOREIGN KEY (`nsd_id`) REFERENCES `nguoidung` (`id`),
+  ADD CONSTRAINT `xe_id` FOREIGN KEY (`xe_id`) REFERENCES `xe` (`id`);
+
+--
+-- Các ràng buộc cho bảng `xe`
+--
+ALTER TABLE `xe`
+  ADD CONSTRAINT `csh_xe` FOREIGN KEY (`csh_id`) REFERENCES `nguoidung` (`id`),
+  ADD CONSTRAINT `th_id` FOREIGN KEY (`th_id`) REFERENCES `trangthai` (`code`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
