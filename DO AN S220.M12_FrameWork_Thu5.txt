@@ -1,0 +1,13 @@
+Đăng ký(Thái)
+Đăng nhập(Thái)
+//Đăng xuất
+Xem và sửa thông tin người dùng(Thái)
+Đăng để thuê xe(Tâm)
+Chỉnh sửa thông tin xe(Tâm)
+//Xóa xe
+Thông tin xe(Tâm)
+Thuê xe (Tâm)
+Xem hợp đồng(Thái)
+Quản lý thành viên(Cường)
+Quản lý xe(Cường)
+Quản lý hãng xe(Cường)
