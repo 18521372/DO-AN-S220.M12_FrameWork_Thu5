@@ -43,6 +43,22 @@ namespace qltx.Controllers
         {
             return View();
         }
+        public IActionResult DangKy()
+        {
+            return View();
+        }
+        public IActionResult DangNhap()
+        {
+            return View();
+        }
+        public IActionResult Profile()
+        {
+            return View();
+        }
+        public IActionResult HopDong()
+        {
+            return View();
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
