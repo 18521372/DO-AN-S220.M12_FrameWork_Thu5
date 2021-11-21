@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Profile";
+}
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-4"></div>
+
+        <div class="col-4">
+            <h2>Thông tin cá nhân</h2>
+            <form>
+                <div class="mb-3 mt-3">
+                    <input type="text" class="form-control" id="name" placeholder="Họ và tên" name="hoten">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="address" placeholder="Địa chỉ" name="diachi">
+                </div>
+                <div class="mb-3">
+                    <input type="number" class="form-control" id="id" placeholder="ID" name="id">
+                </div>
+                <div class="mb-3">
+                    <input type="email" class="form-control" id="email" placeholder="Email" name="email">
+                </div>
+                <div class="mb-3">
+                    <input type="number" class="form-control" id="phone" placeholder="Số điện thoại" name="sdt">
+                </div>
+                <div class="form-check mb-3">
+                    <input type="radio" class="form-check-input" id="male" name="gender" value="nam" checked>Nam
+                    <label class="form-check-label" for="male"></label>
+                </div>
+                <div class="form-check mb-3">
+                    <input type="radio" class="form-check-input" id="female" name="gender" value="nu">Nữ
+                    <label class="form-check-label" for="female"></label>
+                </div>
+                <button type="submit" class="btn btn-primary">Lưu</button>
+
+            </form>
+        </div>
+
+        <div class="col-4"></div>
+    </div>
+</div>
