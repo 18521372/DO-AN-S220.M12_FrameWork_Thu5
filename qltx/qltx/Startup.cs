@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using qltx.Controllers;
+using qltx.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +26,11 @@ namespace qltx
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddMvc();
+            services.Add(new ServiceDescriptor(typeof(StoreContext),
+            new StoreContext(Configuration.GetConnectionString("DefaultConnection"))));
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -50,7 +56,7 @@ namespace qltx
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=DangNhap}/{id?}");
             });
         }
     }
