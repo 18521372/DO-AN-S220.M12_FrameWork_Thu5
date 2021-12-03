@@ -27,6 +27,10 @@ namespace qltx.Controllers
         {
             return View();
         }
+        public IActionResult Dangdethuexe()
+        {
+            return View();
+        }
         public IActionResult quanlythanhvien()
         {
             return View();

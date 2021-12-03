@@ -241,10 +241,9 @@ CREATE TABLE `xe` (
   `tenxe` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   `thuonghieu` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `bienso` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `trangthai_id` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
   `giathue` int(20) NOT NULL,
   `ngaythue` date NOT NULL,
-  `th_id` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
+  `trangthai_id` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
   `loainhienlieu` varchar(10) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -252,27 +251,27 @@ CREATE TABLE `xe` (
 -- Dumping data for table `xe`
 --
 
-INSERT INTO `xe` (`id`, `csh_id`, `tenxe`, `thuonghieu`, `bienso`, `trangthai_id`, `giathue`, `ngaythue`, `th_id`, `loainhienlieu`) VALUES
-('XE0001', 'US0001', 'Toyota', 'T001', '59B1-12425', '01', 5000000, '2021-11-25', 'dt', 'Xang'),
-('XE0002', 'US0001', 'Yamaha', 'T002', '59B1-11242', '02', 5000000, '2021-11-25', 'dt', 'Xang'),
-('XE0003', 'US0003', 'Lamboghini', 'T003', '59B1-21412', '01', 10000000, '2021-12-25', 'cd', 'Xang'),
-('XE0004', 'US0004', 'Rollroyce', 'T004', '60B1-12425', '01', 50000000, '2021-12-25', 'cd', 'Xang'),
-('XE0005', 'US0001', 'Ferrari', 'T005', '59B1-99999', '01', 55000000, '2021-11-20', 'td', 'Xang'),
-('XE0006', 'US0006', 'Bugatti', 'T006', '59B1-77777', '01', 52000000, '2021-11-25', 'ss', 'Xang'),
-('XE0007', 'US0001', 'Yamaha 2', 'T002', '59B1-11242', '02', 5000000, '2021-11-25', 'dt', 'Xang'),
-('XE0008', 'US0008', 'Huyndai', 'T007', '59B1-12345', '02', 10000000, '2021-12-25', 'cd', 'Xang'),
-('XE0009', 'US0009', 'Rollroyce', 'T004', '60B1-12425', '01', 50000000, '2021-12-25', 'cd', 'Xang'),
-('XE0010', 'US0010', 'Ferrari', 'T005', '59B1-99999', '01', 55000000, '2021-11-20', 'td', 'Xang'),
-('XE0011', 'US0011', 'Bugatti', 'T006', '59B1-77777', '01', 52000000, '2021-11-25', 'ss', 'Xang'),
-('XE0012', 'US0012', 'Yamaha', 'T002', '59B1-17775', '02', 5000000, '2021-11-25', 'dt', 'Xang'),
-('XE0013', 'US0013', 'Lamboghini', 'T003', '59B1-21412', '01', 10000000, '2021-12-25', 'cd', 'Xang'),
-('XE0014', 'US0014', 'Aston Martin 1', 'T014', '60B1-12425', '01', 50000000, '2021-12-25', 'ss', 'Xang'),
-('XE0015', 'US0001', 'Ferrari', 'T005', '59B1-99999', '01', 55000000, '2021-11-20', 'td', 'Xang'),
-('XE0016', 'US0016', 'Bugatti', 'T006', '59B1-77777', '01', 52000000, '2021-11-25', 'ss', 'Xang'),
-('XE0017', 'US0017', 'Yamaha', 'T016', '59B1-11242', '02', 5000000, '2021-11-25', 'dt', 'Xang'),
-('XE0018', 'US0018', 'Lamboghini', 'T003', '59B1-21412', '01', 10000000, '2021-12-25', 'cd', 'Xang'),
-('XE0019', 'US0004', 'Rollroyce', 'T004', '60B1-12425', '01', 50000000, '2021-12-25', 'cd', 'Xang'),
-('XE0020', 'US0001', 'Ferrari', 'T005', '59B1-99999', '01', 55000000, '2021-11-20', 'td', 'Xang');
+INSERT INTO `xe` (`id`, `csh_id`, `tenxe`, `thuonghieu`, `bienso`,  `giathue`, `ngaythue`, `trangthai_id`, `loainhienlieu`) VALUES
+('XE0001', 'US0001', 'Toyota', 'T001', '59B1-12425',  5000000, '2021-11-25', 'dt', 'Xang'),
+('XE0002', 'US0001', 'Yamaha', 'T002', '59B1-11242',  5000000, '2021-11-25', 'dt', 'Xang'),
+('XE0003', 'US0003', 'Lamboghini', 'T003', '59B1-21412', 10000000, '2021-12-25', 'cd', 'Xang'),
+('XE0004', 'US0004', 'Rollroyce', 'T004', '60B1-12425',  50000000, '2021-12-25', 'cd', 'Xang'),
+('XE0005', 'US0001', 'Ferrari', 'T005', '59B1-99999',  55000000, '2021-11-20', 'td', 'Xang'),
+('XE0006', 'US0006', 'Bugatti', 'T006', '59B1-77777',  52000000, '2021-11-25', 'ss', 'Xang'),
+('XE0007', 'US0001', 'Yamaha 2', 'T002', '59B1-11242',  5000000, '2021-11-25', 'dt', 'Xang'),
+('XE0008', 'US0008', 'Huyndai', 'T007', '59B1-12345', 10000000, '2021-12-25', 'cd', 'Xang'),
+('XE0009', 'US0009', 'Rollroyce', 'T004', '60B1-12425',  50000000, '2021-12-25', 'cd', 'Xang'),
+('XE0010', 'US0010', 'Ferrari', 'T005', '59B1-99999',  55000000, '2021-11-20', 'td', 'Xang'),
+('XE0011', 'US0011', 'Bugatti', 'T006', '59B1-77777',  52000000, '2021-11-25', 'ss', 'Xang'),
+('XE0012', 'US0012', 'Yamaha', 'T002', '59B1-17775',  5000000, '2021-11-25', 'dt', 'Xang'),
+('XE0013', 'US0013', 'Lamboghini', 'T003', '59B1-21412',  10000000, '2021-12-25', 'cd', 'Xang'),
+('XE0014', 'US0014', 'Aston Martin 1', 'T014', '60B1-12425',  50000000, '2021-12-25', 'ss', 'Xang'),
+('XE0015', 'US0001', 'Ferrari', 'T005', '59B1-99999',  55000000, '2021-11-20', 'td', 'Xang'),
+('XE0016', 'US0016', 'Bugatti', 'T006', '59B1-77777',  52000000, '2021-11-25', 'ss', 'Xang'),
+('XE0017', 'US0017', 'Yamaha', 'T016', '59B1-11242',  5000000, '2021-11-25', 'dt', 'Xang'),
+('XE0018', 'US0018', 'Lamboghini', 'T003', '59B1-21412',  10000000, '2021-12-25', 'cd', 'Xang'),
+('XE0019', 'US0004', 'Rollroyce', 'T004', '60B1-12425',  50000000, '2021-12-25', 'cd', 'Xang'),
+('XE0020', 'US0001', 'Ferrari', 'T005', '59B1-99999',  55000000, '2021-11-20', 'td', 'Xang');
 
 --
 -- Indexes for dumped tables
@@ -325,7 +324,7 @@ ALTER TABLE `trangthai`
 ALTER TABLE `xe`
   ADD PRIMARY KEY (`id`),
   ADD KEY `csh_xe` (`csh_id`),
-  ADD KEY `th_id` (`th_id`),
+  ADD KEY `trangthai_id` (`trangthai_id`),
   ADD KEY `thuonghieu_id` (`thuonghieu`);
 
 --
@@ -358,7 +357,7 @@ ALTER TABLE `thuexe`
 --
 ALTER TABLE `xe`
   ADD CONSTRAINT `csh_xe` FOREIGN KEY (`csh_id`) REFERENCES `nguoidung` (`id`),
-  ADD CONSTRAINT `th_id` FOREIGN KEY (`th_id`) REFERENCES `trangthai` (`code`),
+  ADD CONSTRAINT `trangthai_id` FOREIGN KEY (`trangthai_id`) REFERENCES `trangthai` (`code`),
   ADD CONSTRAINT `thuonghieu_id` FOREIGN KEY (`thuonghieu`) REFERENCES `thuonghieu` (`id`);
 COMMIT;
 
