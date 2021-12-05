@@ -18,11 +18,16 @@ namespace qltx.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index1()
         {
-            return View();
+            ViewBag.i = 1;
+            return View("Index");
         }
-
+        public IActionResult Index2()
+        {
+            ViewBag.i = 2;
+            return View("Index");
+        }
         public IActionResult Privacy()
         {
             return View();
@@ -33,7 +38,12 @@ namespace qltx.Controllers
         }
         public IActionResult quanlythanhvien()
         {
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            List<nguoidung> kh = context.Getthanhvien();
+            ViewData.Model = kh;
+            //StoreContext context = new StoreContext("server=127.0.0.1;user id=root;password=;port=3307;database=quanlythuexe;");
             return View();
+
         }
         public IActionResult quanlyxe()
         {
@@ -49,20 +59,65 @@ namespace qltx.Controllers
         }
         public IActionResult DangKy()
         {
+            TempData["AlertMessage"] = null;
             return View();
+        }
+        public IActionResult DK()
+        {
+            TempData["AlertMessage"] = "Đăng ký thành công";
+            TempData["AlertType"] = "alert-success";
+            return View("DangKy");
         }
         public IActionResult DangNhap()
         {
+
+            return View();
+        }
+        public IActionResult DN1()
+        {
+
+            return View();
+        }
+        public IActionResult DN2()
+        {
+
             return View();
         }
         public IActionResult Profile()
         {
             return View();
         }
-        public IActionResult HopDong()
+        public IActionResult HopDong1()
         {
-            return View();
+            ViewBag.i = 1;
+            return View("HopDong");
         }
+        public IActionResult HopDong2()
+        {
+            ViewBag.i = 2;
+            return View("HopDong");
+        }
+        public IActionResult DN(string email, string password)
+        {
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            int id = context.Timthanhvien(email, password);
+            var li = new List<string>()
+                    {
+                        "1",
+                        "2",
+                        "3",
+                        "4"
+                    };
+            ViewBag.Productname_List = li;
+            ViewBag.MobileCount_List = li;
+            if (id == 1) return View("DN1");
+            if (id == 2) return View("DN2");
+            TempData["AlertMessage"] = "Tài khoản hoặc mật khẩu không đúng!";
+            TempData["AlertType"] = "alert-warning";
+
+            return View("DangNhap");
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

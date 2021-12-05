@@ -1,14 +1,36 @@
 ﻿@{
     ViewData["Title"] = "Đăng ký";
 }
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+@section scripts{
+    <script>
+        $(function () {
+            $('#AlertBox').removeClass('hide');
+            $('#AlertBox').delay(2000).slideUp(500);
+        });
 
+    </script>
+}
+@if (TempData["AlertMessage"] != null)
+{
+    <div id="AlertBox" class="alert @TempData["AlertType"] hide" role="alert" style="text-align:center;">
+        @TempData["AlertMessage"]
+    </div>
+}
 <div class="container mt-3">
     <div class="row">
         <div class="col-4"></div>
 
-        <div class="col-4">
+        <div class="col-4" style="color:white;">
             <h2>Đăng ký</h2>
-            <form>
+
+            <form method="post" action="DK">
                 <div class="mb-3 mt-3">
                     <input type="text" class="form-control" id="name" placeholder="Họ và tên" name="hoten">
                 </div>
@@ -35,15 +57,15 @@
                 <div class="mb-3">
                     <input type="password" class="form-control" id="pwd" placeholder="Mật khẩu" name="matkhau">
                 </div>
-                <div class="form-check mb-3">
-                    <input type="radio" class="form-check-input" id="customer" name="role" value="thue" checked>Người thuê
-                    <label class="form-check-label" for="male"></label>
-                </div>
-                <div class="form-check mb-3">
-                    <input type="radio" class="form-check-input" id="owner" name="role" value="cho-thue">Người cho thuê
-                    <label class="form-check-label" for="female"></label>
-                </div>
+
                 <button type="submit" class="btn btn-primary">Đăng ký</button>
+
+            </form>
+            <form method="post" action="DangNhap">
+                <div class="mb-3">
+
+                    Bạn đã có tài khoản? <button type="submit" class="btn btn-primary">Đăng Nhập</button>
+                </div>
             </form>
         </div>
 
