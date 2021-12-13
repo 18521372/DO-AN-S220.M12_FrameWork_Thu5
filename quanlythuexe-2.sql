@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost:3307
--- Thời gian đã tạo: Th12 05, 2021 lúc 11:37 AM
+-- Thời gian đã tạo: Th12 13, 2021 lúc 11:55 AM
 -- Phiên bản máy phục vụ: 10.4.19-MariaDB
 -- Phiên bản PHP: 8.0.6
 
@@ -33,34 +33,35 @@ CREATE TABLE `ctthuexe` (
   `email` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   `batdau` date NOT NULL,
   `ketthuc` date NOT NULL,
-  `trangthai` varchar(2) COLLATE utf8_unicode_ci NOT NULL
+  `trangthai` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
+  `tongtien` int(11) NOT NULL,
+  `thanhtoan` varchar(15) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `ctthuexe`
 --
 
-INSERT INTO `ctthuexe` (`id`, `sodienthoai`, `email`, `batdau`, `ketthuc`, `trangthai`) VALUES
-('THUE0001', '0124124412', 'av@gmail.com', '2021-11-23', '2021-11-27', 'kt'),
-('THUE0002', '0112456889', 'bv@gmail.com', '2021-11-25', '2021-11-27', 'kt'),
-('THUE0003', '0124124412', 'av@gmail.com', '2021-11-23', '2021-11-27', 'kt'),
-('THUE0004', '0124124412', 'av@gmail.com', '2021-11-23', '2021-11-27', 'kt'),
-('THUE0005', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt'),
-('THUE0006', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt'),
-('THUE0007', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt'),
-('THUE0008', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt'),
-('THUE0009', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt'),
-('THUE0010', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt'),
-('THUE0011', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt'),
-('THUE0012', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt'),
-('THUE0013', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt'),
-('THUE0014', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt'),
-('THUE0015', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt'),
-('THUE0016', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt'),
-('THUE0017', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt'),
-('THUE0018', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt'),
-('THUE0019', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt'),
-('THUE0020', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt');
+INSERT INTO `ctthuexe` (`id`, `sodienthoai`, `email`, `batdau`, `ketthuc`, `trangthai`, `tongtien`, `thanhtoan`) VALUES
+('THUE0001', '0124124412', 'av@gmail.com', '2021-11-23', '2021-11-27', 'kt', 100000000, 'da thanh toan'),
+('THUE0002', '0112456889', 'bv@gmail.com', '2021-11-25', '2021-11-27', 'kt', 80000000, 'da thanh toan'),
+('THUE0003', '0124124412', 'av@gmail.com', '2021-11-23', '2021-11-27', 'kt', 70000000, 'da thanh toan'),
+('THUE0004', '0124124412', 'av@gmail.com', '2021-11-23', '2021-11-27', 'kt', 90000000, 'da thanh toan'),
+('THUE0005', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt', 110000000, 'da thanh toan'),
+('THUE0006', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt', 80000000, 'da thanh toan'),
+('THUE0008', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt', 70000000, 'da thanh toan'),
+('THUE0009', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt', 50000000, 'da thanh toan'),
+('THUE0010', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt', 40000000, 'da thanh toan'),
+('THUE0011', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt', 95000000, 'da thanh toan'),
+('THUE0012', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt', 80000000, 'da thanh toan'),
+('THUE0013', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt', 76000000, 'da thanh toan'),
+('THUE0014', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt', 65000000, 'da thanh toan'),
+('THUE0015', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt', 100000000, 'da thanh toan'),
+('THUE0016', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt', 100000000, 'da thanh toan'),
+('THUE0017', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt', 87000000, 'da thanh toan'),
+('THUE0018', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt', 100000000, 'da thanh toan'),
+('THUE0019', '0984566378', 'cuc123@gmail.com', '2021-12-16', '2021-12-22', 'kt', 9000000, 'da thanh toan'),
+('THUE0020', '0984566378', 'cuc123@gmail.com', '2021-11-16', '2021-11-22', 'kt', 9000000, 'da thanh toan');
 
 -- --------------------------------------------------------
 
@@ -103,9 +104,7 @@ INSERT INTO `nguoidung` (`id`, `ten`, `email`, `diachi`, `gioitinh`, `ngaysinh`,
 ('US0015', 'Dinh Luc', 'dh123@gmail.com', 'Thu Duc, Ho Chi Minh', 'Nam', '1991-02-03', '3466538677364', 'ca123', '0913581285', 1),
 ('US0016', 'Huynh C', 'hb123@gmail.com', 'Trang Bom, Dong Nai', 'Nam', '1995-01-03', 'qq24112', 'ca123', '0984324568', 1),
 ('US0017', 'Tran Thi', 'td123@gmail.com', 'Bien Hoa, Dong Nai', 'Nam', '1991-02-03', '12412124125', 'ca123', '0214124524', 2),
-('US0018', 'Chau E', 'cd123@gmail.com', 'Bien Hoa, Dong Nai', 'Nu', '1989-02-03', '124125125', 'ca123', '0241466732', 2),
-('US0019', 'Cao Cau', 'ca123@gmail.com', 'Thu Duc, Ho Chi Minh', 'Nam', '1991-02-03', '3466538677364', 'ca123', '0124124512', 1),
-('US0020', 'Dinh Chinh', 'dh123@gmail.com', 'Thu Duc, Ho Chi Minh', 'Nam', '1991-02-03', '3466538677364', 'ca123', '0913581285', 2);
+('US0018', 'Chau Thi No', 'cd123@gmail.com', 'Bien Hoa, Dong Nai', 'Nu', '1989-02-03', '124125125', 'ca123', '0241466732', 2);
 
 -- --------------------------------------------------------
 
@@ -162,8 +161,8 @@ INSERT INTO `thuexe` (`id`, `nsd_id`, `xe_id`) VALUES
 ('THUE0016', 'US0016', 'XE0016'),
 ('THUE0017', 'US0017', 'XE0017'),
 ('THUE0018', 'US0018', 'XE0018'),
-('THUE0019', 'US0019', 'XE0019'),
-('THUE0020', 'US0020', 'XE0020');
+('THUE0019', 'US0004', 'XE0003'),
+('THUE0020', 'US0002', 'XE0001');
 
 -- --------------------------------------------------------
 
@@ -202,8 +201,7 @@ INSERT INTO `thuonghieu` (`id`, `tenth`, `quocgia`) VALUES
 ('T019', 'Lexus', 'Japan'),
 ('T020', 'Mazda', 'Japan'),
 ('T021', 'Nissan', 'Japan'),
-('T022', 'Subaru', 'Japan'),
-('T023', 'Mini Cooper', 'England');
+('T022', 'Subaru', 'Japan');
 
 -- --------------------------------------------------------
 
@@ -270,14 +268,14 @@ CREATE TABLE `xe` (
 --
 
 INSERT INTO `xe` (`id`, `csh_id`, `tenxe`, `thuonghieu`, `vitri`, `bienso`, `giathue`, `ngaythue`, `trangthai_id`, `loainhienlieu`) VALUES
-('XE0001', 'US0001', 'Toyota', 'T001', 'Ho Chi Minh', '59B1-12425', 5000000, '2021-11-25', 'dt', 'Xang'),
-('XE0002', 'US0001', 'Yamaha', 'T002', 'Ho Chi Minh', '59B1-11242', 5000000, '2021-11-25', 'ss', 'Xang'),
-('XE0003', 'US0003', 'Lamboghini', 'T003', 'Ho Chi Minh', '59B1-21412', 10000000, '2021-12-25', 'cd', 'Xang'),
-('XE0004', 'US0004', 'Rollroyce', 'T004', 'Ho Chi Minh', '60B1-12425', 50000000, '2021-12-25', 'cd', 'Xang'),
-('XE0005', 'US0001', 'Ferrari', 'T005', 'Da Nang', '59B1-99999', 55000000, '2021-11-20', 'td', 'Xang'),
+('XE0001', 'US0001', 'Toyota', 'T001', 'Ho Chi Minh', '59B1-12425', 5000000, '2021-11-02', 'dt', 'Xang'),
+('XE0002', 'US0001', 'Yamaha', 'T002', 'Ho Chi Minh', '59B1-11242', 5000000, '2020-10-13', 'ss', 'Xang'),
+('XE0003', 'US0003', 'Lamboghini', 'T003', 'Ho Chi Minh', '59B1-21412', 10000000, '2021-12-02', 'cd', 'Xang'),
+('XE0004', 'US0004', 'Rollroyce', 'T004', 'Ho Chi Minh', '60B1-12425', 50000000, '2021-12-07', 'cd', 'Xang'),
+('XE0005', 'US0001', 'Ferrari', 'T005', 'Da Nang', '59B1-99999', 55000000, '2021-11-02', 'td', 'Xang'),
 ('XE0006', 'US0006', 'Bugatti', 'T006', 'Ho Chi Minh', '59B1-77777', 52000000, '2021-11-25', 'ss', 'Xang'),
 ('XE0007', 'US0001', 'Yamaha 2', 'T002', 'Da Nang', '59B1-11242', 5000000, '2021-11-25', 'dt', 'Xang'),
-('XE0008', 'US0008', 'Huyndai', 'T007', 'Ho Chi Minh', '59B1-12345', 10000000, '2021-12-25', 'cd', 'Xang'),
+('XE0008', 'US0008', 'Huyndai', 'T007', 'Ho Chi Minh', '59B1-12345', 10000000, '2021-11-30', 'cd', 'Xang'),
 ('XE0009', 'US0009', 'Rollroyce', 'T004', 'Da Nang', '60B1-12425', 50000000, '2021-12-25', 'cd', 'Xang'),
 ('XE0010', 'US0010', 'Ferrari', 'T005', 'Da Nang', '59B1-99999', 55000000, '2021-11-20', 'td', 'Xang'),
 ('XE0011', 'US0011', 'Bugatti', 'T006', 'Ho Chi Minh', '59B1-77777', 52000000, '2021-11-25', 'ss', 'Xang'),
@@ -299,7 +297,8 @@ INSERT INTO `xe` (`id`, `csh_id`, `tenxe`, `thuonghieu`, `vitri`, `bienso`, `gia
 -- Chỉ mục cho bảng `ctthuexe`
 --
 ALTER TABLE `ctthuexe`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `tt_tx` (`trangthai`);
 
 --
 -- Chỉ mục cho bảng `nguoidung`
@@ -357,7 +356,8 @@ ALTER TABLE `xe`
 -- Các ràng buộc cho bảng `ctthuexe`
 --
 ALTER TABLE `ctthuexe`
-  ADD CONSTRAINT `ct_id` FOREIGN KEY (`id`) REFERENCES `thuexe` (`id`);
+  ADD CONSTRAINT `ct_id` FOREIGN KEY (`id`) REFERENCES `thuexe` (`id`),
+  ADD CONSTRAINT `tt_tx` FOREIGN KEY (`trangthai`) REFERENCES `trangthaithue` (`id`);
 
 --
 -- Các ràng buộc cho bảng `nguoidung`

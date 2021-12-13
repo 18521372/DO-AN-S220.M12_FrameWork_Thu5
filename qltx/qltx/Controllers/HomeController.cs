@@ -77,6 +77,22 @@ namespace qltx.Controllers
             ViewData.Model = kh;
             return View("quanlyhangxe");
         }
+        public IActionResult Timxe(string id_tim)
+        {
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            List<xe> kh = context.Timxe(id_tim);
+            if (kh.Any())
+            {
+                ViewData.Model = kh;
+                return View("quanlyxe");
+            }
+            TempData["AlertMessage"] = "Không tìm thấy";
+            TempData["AlertType"] = "alert-warning";
+            context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            kh = context.Getxe();
+            ViewData.Model = kh;
+            return View("quanlyxe");
+        }
         public IActionResult Timthuexe(string id_tim)
         {
             StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
@@ -126,9 +142,28 @@ namespace qltx.Controllers
             return View("quanlyhangxe");
 
         }
+        public IActionResult Xoaxe(string id)
+        {
 
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            int[] count = context.Xoaxe(id);
+            if (count.Length != 0)
+            {
+                TempData["AlertMessage"] = "Xóa thành công";
+                TempData["AlertType"] = "alert-success";
+            }
+            context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            List<xe> kh = context.Getxe();
+            ViewData.Model = kh;
+            return View("quanlyxe");
+
+        }
         public IActionResult quanlyxe()
         {
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            List<xe> kh = context.Getxe();
+            ViewData.Model = kh;
+            //StoreContext context = new StoreContext("server=127.0.0.1;user id=root;password=;port=3307;database=quanlythuexe;");
             return View();
         }
         public IActionResult quanlyhangxe()

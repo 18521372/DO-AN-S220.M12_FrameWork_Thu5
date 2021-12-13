@@ -94,6 +94,81 @@ namespace qltx.Models
             }
             return list;
         }
+        public List<xe> Getxe()
+        {
+            List<xe> list = new List<xe>();
+
+            //MySqlConnection conn = new MySqlConnection("server=127.0.0.1;user id=root;password=;port=3306;database=qlsv;");
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                string str = "select * from xe ";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        list.Add(new xe()
+                        {
+                            id = reader["id"].ToString(),
+                            csh_id = reader["csh_id"].ToString(),
+                            tenxe = reader["tenxe"].ToString(),
+                            thuonghieu = reader["thuonghieu"].ToString(),
+                            vitri = reader["vitri"].ToString(),
+                            giathue = Convert.ToInt32(reader["giathue"]),
+                            bienso = reader["bienso"].ToString(),
+                            ngaythue = Convert.ToDateTime(reader["ngaythue"]),
+                            trangthai_id = reader["trangthai_id"].ToString(),
+                            loainhienlieu = reader["loainhienlieu"].ToString(),
+
+                        });
+                    }
+                    reader.Close();
+                }
+
+                conn.Close();
+
+            }
+            return list;
+        }
+        public List<xe> Timxe(string id)
+        {
+            List<xe> list = new List<xe>();
+
+            //MySqlConnection conn = new MySqlConnection("server=127.0.0.1;user id=root;password=;port=3306;database=qlsv;");
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                string str = "select * from xe where  id =@id";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                cmd.Parameters.AddWithValue("id", id);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        list.Add(new xe()
+                        {
+                            id = reader["id"].ToString(),
+                            csh_id = reader["csh_id"].ToString(),
+                            tenxe = reader["tenxe"].ToString(),
+                            thuonghieu = reader["thuonghieu"].ToString(),
+                            vitri = reader["vitri"].ToString(),
+                            giathue = Convert.ToInt32(reader["giathue"]),
+                            bienso = reader["bienso"].ToString(),
+                            ngaythue = Convert.ToDateTime(reader["ngaythue"]),
+                            trangthai_id = reader["trangthai_id"].ToString(),
+                            loainhienlieu = reader["loainhienlieu"].ToString(),
+
+                        });
+                    }
+                    reader.Close();
+                }
+
+                conn.Close();
+
+            }
+            return list;
+        }
         public List<thuexe> Timthuexe(string id)
         {
             List<thuexe> list = new List<thuexe>();
@@ -274,11 +349,36 @@ namespace qltx.Models
                 var queryKHACHHANG1 = "delete from thuonghieu where id=@makh";
                 MySqlCommand cmd4 = new MySqlCommand(queryKHACHHANG1, conn);
                 cmd3.Parameters.AddWithValue("makh", makh);
-                int[] deleted = new int[3];
+                int[] deleted = new int[4];
                 deleted[0] = cmd1.ExecuteNonQuery();
                 deleted[1] = cmd2.ExecuteNonQuery();
                 deleted[2] = cmd3.ExecuteNonQuery();
                 deleted[3] = cmd4.ExecuteNonQuery();
+                return deleted;
+            }
+        }
+        public int[] Xoaxe(string makh)
+        {
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+
+                var queryCTHD = "delete from ctthuexe where id  in (select distinct id from thuexe  where xe_id=@makh)";
+                MySqlCommand cmd1 = new MySqlCommand(queryCTHD, conn);
+                cmd1.Parameters.AddWithValue("makh", makh);
+
+                var queryHOPDONG = "delete from thuexe where  xe_id =@makh";
+                MySqlCommand cmd2 = new MySqlCommand(queryHOPDONG, conn);
+                cmd2.Parameters.AddWithValue("makh", makh);
+
+                var queryKHACHHANG = "delete from xe where id=@makh";
+                MySqlCommand cmd3 = new MySqlCommand(queryKHACHHANG, conn);
+                cmd3.Parameters.AddWithValue("makh", makh);
+               
+                int[] deleted = new int[3];
+                deleted[0] = cmd1.ExecuteNonQuery();
+                deleted[1] = cmd2.ExecuteNonQuery();
+                deleted[2] = cmd3.ExecuteNonQuery();           
                 return deleted;
             }
         }
