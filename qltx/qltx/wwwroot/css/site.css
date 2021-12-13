@@ -103,3 +103,15 @@ th {
 td {
     color: white;
 }
+.my-custom-scrollbar {
+    position: relative;
+    width: 40%;
+    overflow: auto;
+    overflow-x: scroll;
+}
+table {
+    counter-reset: number 1;
+}
+.table-wrapper-scroll-y {
+    display: block;
+}
