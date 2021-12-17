@@ -171,6 +171,7 @@ namespace qltx.Controllers
             StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
             List<thuonghieu> kh = context.Gethangxe();
             ViewData.Model = kh;
+            TempData["tongxe"] = 5;
             //StoreContext context = new StoreContext("server=127.0.0.1;user id=root;password=;port=3307;database=quanlythuexe;");
             return View();
             
@@ -207,7 +208,17 @@ namespace qltx.Controllers
         }
         public IActionResult DN2()
         {
-
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            List<chart> list = context.Getsoluongxe();
+            List<nguoidung> nd = context.thuenhieunhat();
+            int tongxe = context.tongxe();
+            ViewData["tongxe"] = tongxe;
+            int tongnd = context.tongnd();
+            ViewData["tongnd"] = tongnd;
+            int tongxedt = context.tongxedt();
+            ViewData["tongxedt"] = tongxedt;
+            ViewData["xe"] = list;
+            ViewData["nd"] = nd;
             return View();
         }
         public IActionResult Profile()
@@ -227,18 +238,23 @@ namespace qltx.Controllers
         public IActionResult DN(string email, string password)
         {
             StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
-            int id = context.Timthanhvien(email, password);
-            var li = new List<string>()
-                    {
-                        "1",
-                        "2",
-                        "3",
-                        "4"
-                    };
-            ViewBag.Productname_List = li;
-            ViewBag.MobileCount_List = li;
+            int id = context.Timthanhvien(email, password);      
             if (id == 1) return View("DN1");
-            if (id == 2) return View("DN2");
+            if (id == 2) 
+            {
+                 context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+                List<chart> list = context.Getsoluongxe();
+                List<nguoidung> nd = context.thuenhieunhat();
+                int tongxe = context.tongxe();
+                ViewData["tongxe"] = tongxe;
+                int tongxedt = context.tongxedt();
+                ViewData["tongxedt"] = tongxedt;
+                int tongnd = context.tongnd();
+                ViewData["tongnd"] = tongnd;
+                ViewData["xe"] = list;
+                ViewData["nd"] = nd;
+                return View("DN2"); 
+            }
             TempData["AlertMessage"] = "Tài khoản hoặc mật khẩu không đúng!";
             TempData["AlertType"] = "alert-warning";
 

@@ -414,5 +414,142 @@ namespace qltx.Models
             }
             return i;
         }
+        public List<chart> Getsoluongxe()
+        {
+            List<chart> list = new List<chart>();
+
+            //MySqlConnection conn = new MySqlConnection("server=127.0.0.1;user id=root;password=;port=3306;database=qlsv;");
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                string str = "SELECT month(batdau) as thang,COUNT(*) as tong FROM `ctthuexe` GROUP by month(batdau)";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+               
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        list.Add(new chart()
+                        {
+                            row = Convert.ToInt32(reader["thang"]),
+                            col= Convert.ToInt32(reader["tong"])
+                        });
+                    }
+                    reader.Close();
+                }
+
+                conn.Close();
+
+            }
+            return list;
+        }
+        public List<nguoidung> thuenhieunhat()
+        {
+            List<nguoidung> list = new List<nguoidung>();
+
+            //MySqlConnection conn = new MySqlConnection("server=127.0.0.1;user id=root;password=;port=3306;database=qlsv;");
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                string str = "SELECT nd.id, ten, email, diachi,gioitinh, ngaysinh,id_card, sodienthoai ,COUNT(*) as solanthue FROM thuexe tx, nguoidung nd WHERE nsd_id=nd.id GROUP by nsd_id ORDER by COUNT(*) DESC limit 5";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        list.Add(new nguoidung()
+                        {
+
+                            id = reader["id"].ToString(),
+                            ten = reader["ten"].ToString(),
+                            email = reader["email"].ToString(),
+                            diachi = reader["diachi"].ToString(),
+                            gioitinh = reader["gioitinh"].ToString(),
+                            ngaysinh = Convert.ToDateTime(reader["ngaysinh"]),
+                            id_card = reader["id_card"].ToString(),
+                            sodienthoai = reader["sodienthoai"].ToString(),
+                            quyen=Convert.ToInt32(reader["solanthue"]),
+                        });
+                    }
+                    reader.Close();
+                }
+
+                conn.Close();
+
+            }
+            return list;
+        }
+        public int tongxe()
+        {
+
+            int tongxe = 0 ;
+            //MySqlConnection conn = new MySqlConnection("server=127.0.0.1;user id=root;password=;port=3306;database=qlsv;");
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                string str = "SELECT COUNT(*) as tongxe FROM xe";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        tongxe = Convert.ToInt32(reader["tongxe"]);
+                    }
+                    reader.Close();
+                }
+
+                conn.Close();
+
+            }
+            return tongxe;
+        }
+        public int tongxedt()
+        {
+
+            int tongxe = 0;
+            //MySqlConnection conn = new MySqlConnection("server=127.0.0.1;user id=root;password=;port=3306;database=qlsv;");
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                string str = "SELECT COUNT(*) as tongxe FROM ctthuexe WHERE trangthai='dt'";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        tongxe = Convert.ToInt32(reader["tongxe"]);
+                    }
+                    reader.Close();
+                }
+
+                conn.Close();
+
+            }
+            return tongxe;
+        }
+        public int tongnd()
+        {
+
+            int tongxe = 0;
+            //MySqlConnection conn = new MySqlConnection("server=127.0.0.1;user id=root;password=;port=3306;database=qlsv;");
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                string str = "SELECT COUNT(*) as tongxe FROM nguoidung";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        tongxe = Convert.ToInt32(reader["tongxe"]);
+                    }
+                    reader.Close();
+                }
+
+                conn.Close();
+
+            }
+            return tongxe;
+        }
     }
 }
