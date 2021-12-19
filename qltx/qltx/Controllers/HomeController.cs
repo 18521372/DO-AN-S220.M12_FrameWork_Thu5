@@ -190,10 +190,22 @@ namespace qltx.Controllers
             TempData["AlertMessage"] = null;
             return View();
         }
-        public IActionResult DK()
+        public IActionResult DK(nguoidung nd)
         {
-            TempData["AlertMessage"] = "Đăng ký thành công";
-            TempData["AlertType"] = "alert-success";
+            int count;
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            count = context.ThemUser(nd);
+
+            if (count > 0)
+            {
+                TempData["AlertMessage"] = "Đăng ký thành công";
+                TempData["AlertType"] = "alert-success";
+            }
+            else
+            {
+                TempData["AlertMessage"] = "Đăng ký không thành công";
+                TempData["AlertType"] = "alert-danger";
+            }
             return View("DangKy");
         }
         public IActionResult DangNhap()

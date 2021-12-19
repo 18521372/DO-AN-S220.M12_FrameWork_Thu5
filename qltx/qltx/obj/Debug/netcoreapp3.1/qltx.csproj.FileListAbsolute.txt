@@ -95,7 +95,6 @@ D:\DO-AN-S220.M12_FrameWork_Thu5\qltx\qltx\bin\Debug\netcoreapp3.1\qltx.dll
 D:\DO-AN-S220.M12_FrameWork_Thu5\qltx\qltx\bin\Debug\netcoreapp3.1\qltx.pdb
 D:\DO-AN-S220.M12_FrameWork_Thu5\qltx\qltx\bin\Debug\netcoreapp3.1\qltx.Views.dll
 D:\DO-AN-S220.M12_FrameWork_Thu5\qltx\qltx\bin\Debug\netcoreapp3.1\qltx.Views.pdb
-D:\DO-AN-S220.M12_FrameWork_Thu5\qltx\qltx\obj\Debug\netcoreapp3.1\qltx.csprojAssemblyReference.cache
 D:\DO-AN-S220.M12_FrameWork_Thu5\qltx\qltx\obj\Debug\netcoreapp3.1\qltx.AssemblyInfoInputs.cache
 D:\DO-AN-S220.M12_FrameWork_Thu5\qltx\qltx\obj\Debug\netcoreapp3.1\qltx.AssemblyInfo.cs
 D:\DO-AN-S220.M12_FrameWork_Thu5\qltx\qltx\obj\Debug\netcoreapp3.1\qltx.csproj.CoreCompileInputs.cache
@@ -267,3 +266,5 @@ C:\Users\Administrator\Source\Repos\18521372\DO-AN-S220.M12_FrameWork_Thu5\qltx\
 C:\Users\Administrator\Source\Repos\18521372\DO-AN-S220.M12_FrameWork_Thu5\qltx\qltx\obj\Debug\netcoreapp3.1\qltx.dll
 C:\Users\Administrator\Source\Repos\18521372\DO-AN-S220.M12_FrameWork_Thu5\qltx\qltx\obj\Debug\netcoreapp3.1\qltx.pdb
 C:\Users\Administrator\Source\Repos\18521372\DO-AN-S220.M12_FrameWork_Thu5\qltx\qltx\obj\Debug\netcoreapp3.1\qltx.genruntimeconfig.cache
+D:\DO-AN-S220.M12_FrameWork_Thu5\qltx\qltx\obj\Debug\netcoreapp3.1\qltx.csproj.AssemblyReference.cache
+D:\DO-AN-S220.M12_FrameWork_Thu5\qltx\qltx\obj\Debug\netcoreapp3.1\qltx.GeneratedMSBuildEditorConfig.editorconfig

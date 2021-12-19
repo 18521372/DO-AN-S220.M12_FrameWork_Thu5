@@ -551,5 +551,43 @@ namespace qltx.Models
             }
             return tongxe;
         }
+
+        public int ThemUser(nguoidung nd)
+        {
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                var str = "insert into nguoidung(ten, email, diachi, gioitinh, ngaysinh, id_card, password, sodienthoai, quyen_id) values(@ten, @email, @diachi, @gioitinh, @ngaysinh, @idcard, @password, @sdt, @quyen)";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                cmd.Parameters.AddWithValue("ten", nd.ten);
+                cmd.Parameters.AddWithValue("email", nd.email);
+                cmd.Parameters.AddWithValue("diachi", nd.diachi);
+                cmd.Parameters.AddWithValue("gioitinh", nd.gioitinh);
+                cmd.Parameters.AddWithValue("ngaysinh", nd.ngaysinh);
+                cmd.Parameters.AddWithValue("idcard", nd.id_card);
+                cmd.Parameters.AddWithValue("password", nd.password);
+                cmd.Parameters.AddWithValue("sdt", nd.sodienthoai);
+                cmd.Parameters.AddWithValue("quyen", nd.quyen);
+                return (cmd.ExecuteNonQuery());
+
+            }
+        }
+        /*
+        public int UpdateUser(nguoidung nd)
+        {
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                var str = "update nguoidung set ten=@ten, diachi=@diachi, email=@email, gioitinh=@gioitinh, sodienthoai=@sdt where id=@id";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                cmd.Parameters.AddWithValue("ten", nd.ten);
+                cmd.Parameters.AddWithValue("diachi", nd.diachi);
+                cmd.Parameters.AddWithValue("email", nd.email);
+                cmd.Parameters.AddWithValue("sdt", nd.sodienthoai);
+                cmd.Parameters.AddWithValue("id", nd.id);
+                return (cmd.ExecuteNonQuery());
+            }
+        }
+        */
     }
 }

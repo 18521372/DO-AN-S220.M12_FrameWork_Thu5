@@ -31,31 +31,42 @@
             <h2>Đăng ký</h2>
 
             <form method="post" action="DK">
-                <div class="mb-3 mt-3">
-                    <input type="text" class="form-control" id="name" placeholder="Họ và tên" name="hoten">
+                <div class="mb-2 mt-3">
+                    <input type="text" class="form-control" id="name" placeholder="Họ và tên" name="ten">
                 </div>
-                <div class="mb-3">
+                <div class="mb-2">
+                    <input type="date" class="form-control" id="dob" placeholder="Ngày sinh" name="ngaysinh">
+                </div>
+                <div class="mb-2">
                     <input type="text" class="form-control" id="address" placeholder="Địa chỉ" name="diachi">
                 </div>
-                <div class="mb-3">
-                    <input type="number" class="form-control" id="id" placeholder="ID" name="id">
+                <div class="mb-2">
+                    <input type="text" class="form-control" id="id" placeholder="ID Card" name="id_card">
                 </div>
-                <div class="mb-3">
+                <div class="mb-2">
                     <input type="email" class="form-control" id="email" placeholder="Email" name="email">
                 </div>
-                <div class="mb-3">
-                    <input type="number" class="form-control" id="phone" placeholder="Số điện thoại" name="sdt">
+                <div class="mb-2">
+                    <input type="text" class="form-control" id="phone" placeholder="Số điện thoại" name="sodienthoai">
                 </div>
-                <div class="form-check mb-3">
-                    <input type="radio" class="form-check-input" id="male" name="gender" value="nam" checked>Nam
+                <div class="form-check mb-2">
+                    <input type="radio" class="form-check-input" id="male" name="gioitinh" value="Nam" checked>Nam
                     <label class="form-check-label" for="male"></label>
                 </div>
-                <div class="form-check mb-3">
-                    <input type="radio" class="form-check-input" id="female" name="gender" value="nu">Nữ
+                <div class="form-check mb-2">
+                    <input type="radio" class="form-check-input" id="female" name="gioitinh" value="Nu">Nữ
                     <label class="form-check-label" for="female"></label>
                 </div>
-                <div class="mb-3">
-                    <input type="password" class="form-control" id="pwd" placeholder="Mật khẩu" name="matkhau">
+                <div class="mb-2">
+                    <input type="password" class="form-control" id="pwd" placeholder="Mật khẩu" name="password">
+                </div>
+                <div class="form-check mb-2">
+                    <input type="radio" class="form-check-input" id="role1" name="quyen" value="1" checked>Thuê
+                    <label class="form-check-label" for="role1"></label>
+                </div>
+                <div class="form-check mb-2">
+                    <input type="radio" class="form-check-input" id="role2" name="quyen" value="2">Cho thuê
+                    <label class="form-check-label" for="role2"></label>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Đăng ký</button>
