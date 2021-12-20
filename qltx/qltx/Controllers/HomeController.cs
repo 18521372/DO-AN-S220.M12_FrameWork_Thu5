@@ -49,31 +49,171 @@ namespace qltx.Controllers
             StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
             List<nguoidung> kh = context.Getthanhvien();
             ViewData.Model = kh;
-            //StoreContext context = new StoreContext("server=127.0.0.1;user id=root;password=;port=3307;database=quanlythuexe;");
             return View();
+
+        }
+        public IActionResult Timthanhvien(string id_tim)
+        {
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            List<nguoidung> kh = context.Timthanhvien(id_tim);
+            
+            if (kh.Any())
+            {
+                ViewData.Model = kh;
+                return View("quanlythanhvien");
+            }
+            TempData["AlertMessage"] = "Không tìm thấy";
+            TempData["AlertType"] = "alert-warning";
+            context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+             kh = context.Getthanhvien();
+            ViewData.Model = kh;
+            return View("quanlythanhvien");
+        }
+        public IActionResult Timhangxe(string id_tim)
+        {
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            List<thuonghieu> kh = context.Timhangxe(id_tim);           
+            if (kh.Any())
+            {
+                ViewData.Model = kh;
+                return View("quanlyhangxe");
+            }
+            TempData["AlertMessage"] = "Không tìm thấy";
+            TempData["AlertType"] = "alert-warning";
+            context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            kh = context.Gethangxe();
+            ViewData.Model = kh;
+            return View("quanlyhangxe");
+        }
+        public IActionResult Timxe(string id_tim)
+        {
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            List<xe> kh = context.Timxe(id_tim);
+            if (kh.Any())
+            {
+                ViewData.Model = kh;
+                return View("quanlyxe");
+            }
+            TempData["AlertMessage"] = "Không tìm thấy";
+            TempData["AlertType"] = "alert-warning";
+            context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            kh = context.Getxe();
+            ViewData.Model = kh;
+            return View("quanlyxe");
+        }
+        public IActionResult Timthuexe(string id_tim)
+        {
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            List<thuexe> kh = context.Timthuexe(id_tim);
+            if (kh.Any())
+            {
+                ViewData.Model = kh;
+                return View("quanlythuexe");
+            }
+            TempData["AlertMessage"] = "Không tìm thấy";
+            TempData["AlertType"] = "alert-warning";
+            context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            kh = context.Getthuexe();
+            ViewData.Model = kh;
+            return View("quanlythuexe");
+        }
+        public IActionResult Xoanguoidung(string id)
+        {
+
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            int[] count = context.Xoanguoidung(id);
+            if (count.Length != 0)
+            {
+                TempData["AlertMessage"] = "Xóa thành công";
+                TempData["AlertType"] = "alert-success";
+            }
+            context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            List<nguoidung> kh = context.Getthanhvien();
+            ViewData.Model = kh;
+            //StoreContext context = new StoreContext("server=127.0.0.1;user id=root;password=;port=3307;database=quanlythuexe;");
+            return View("quanlythanhvien");
+
+        }
+        public IActionResult Xoahangxe(string id)
+        {
+
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            int[] count = context.Xoahangxe(id);
+            if (count.Length != 0)
+            {
+                TempData["AlertMessage"] = "Xóa thành công";
+                TempData["AlertType"] = "alert-success";
+            }
+            context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            List<thuonghieu> kh = context.Gethangxe();
+            ViewData.Model = kh;
+            return View("quanlyhangxe");
+
+        }
+        public IActionResult Xoaxe(string id)
+        {
+
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            int[] count = context.Xoaxe(id);
+            if (count.Length != 0)
+            {
+                TempData["AlertMessage"] = "Xóa thành công";
+                TempData["AlertType"] = "alert-success";
+            }
+            context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            List<xe> kh = context.Getxe();
+            ViewData.Model = kh;
+            return View("quanlyxe");
 
         }
         public IActionResult quanlyxe()
         {
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            List<xe> kh = context.Getxe();
+            ViewData.Model = kh;
+            //StoreContext context = new StoreContext("server=127.0.0.1;user id=root;password=;port=3307;database=quanlythuexe;");
             return View();
         }
         public IActionResult quanlyhangxe()
         {
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            List<thuonghieu> kh = context.Gethangxe();
+            ViewData.Model = kh;
+            TempData["tongxe"] = 5;
+            //StoreContext context = new StoreContext("server=127.0.0.1;user id=root;password=;port=3307;database=quanlythuexe;");
             return View();
+            
         }
         public IActionResult quanlythuexe()
         {
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            List<thuexe> kh = context.Getthuexe();
+            ViewData.Model = kh;
             return View();
+
+           
         }
         public IActionResult DangKy()
         {
             TempData["AlertMessage"] = null;
             return View();
         }
-        public IActionResult DK()
+        public IActionResult DK(nguoidung nd)
         {
-            TempData["AlertMessage"] = "Đăng ký thành công";
-            TempData["AlertType"] = "alert-success";
+            int count;
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            count = context.ThemUser(nd);
+
+            if (count > 0)
+            {
+                TempData["AlertMessage"] = "Đăng ký thành công";
+                TempData["AlertType"] = "alert-success";
+            }
+            else
+            {
+                TempData["AlertMessage"] = "Đăng ký không thành công";
+                TempData["AlertType"] = "alert-danger";
+            }
             return View("DangKy");
         }
         public IActionResult DangNhap()
@@ -88,7 +228,17 @@ namespace qltx.Controllers
         }
         public IActionResult DN2()
         {
-
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            List<chart> list = context.Getsoluongxe();
+            List<nguoidung> nd = context.thuenhieunhat();
+            int tongxe = context.tongxe();
+            ViewData["tongxe"] = tongxe;
+            int tongnd = context.tongnd();
+            ViewData["tongnd"] = tongnd;
+            int tongxedt = context.tongxedt();
+            ViewData["tongxedt"] = tongxedt;
+            ViewData["xe"] = list;
+            ViewData["nd"] = nd;
             return View();
         }
         public IActionResult Profile()
@@ -108,18 +258,23 @@ namespace qltx.Controllers
         public IActionResult DN(string email, string password)
         {
             StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
-            int id = context.Timthanhvien(email, password);
-            var li = new List<string>()
-                    {
-                        "1",
-                        "2",
-                        "3",
-                        "4"
-                    };
-            ViewBag.Productname_List = li;
-            ViewBag.MobileCount_List = li;
+            int id = context.Timthanhvien(email, password);      
             if (id == 1) return View("DN1");
-            if (id == 2) return View("DN2");
+            if (id == 2) 
+            {
+                 context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+                List<chart> list = context.Getsoluongxe();
+                List<nguoidung> nd = context.thuenhieunhat();
+                int tongxe = context.tongxe();
+                ViewData["tongxe"] = tongxe;
+                int tongxedt = context.tongxedt();
+                ViewData["tongxedt"] = tongxedt;
+                int tongnd = context.tongnd();
+                ViewData["tongnd"] = tongnd;
+                ViewData["xe"] = list;
+                ViewData["nd"] = nd;
+                return View("DN2"); 
+            }
             TempData["AlertMessage"] = "Tài khoản hoặc mật khẩu không đúng!";
             TempData["AlertType"] = "alert-warning";
 

@@ -3,6 +3,22 @@
     Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 @{
+    @section scripts{
+        <script>
+            $(function () {
+                $('#AlertBox').removeClass('hide');
+                $('#AlertBox').delay(2000).slideUp(500);
+            });
+
+        </script>
+    }
+    @if (TempData["AlertMessage"] != null)
+    {
+        <div id="AlertBox" class="alert @TempData["AlertType"] hide" role="alert" style="text-align:center;">
+            @TempData["AlertMessage"]
+        </div>
+    }
+    var i = 1;
     <html lang="en">
     <head>
         <title>Bootstrap Example</title>
@@ -13,55 +29,57 @@
     </head>
     <body>
         <div class="container mt-3" style="color:white;">
-            <form>
+            <form action="Timthuexe" method="post">
                 <div class="row">
                     <div class="col">
-                        <input type="text" class="form-control" name="id" placeholder="Nhập id">
+                        <input type="text" class="form-control" name="id_tim" placeholder="Nhập id">
                     </div>
                     <div class="col">
                         <input type="Submit" name="Submit" class="btn btn-primary" value="Tìm">
                     </div>
+                </div>
+            </form>
+            <form>
+                <div class="row">                   
                     <div class="row">
-                        <div class="col">
+                        <div class="col table-wrapper-scroll-y my-custom-scrollbar" style="height: 50px ;overflow-y: scroll;overflow-x:hidden; min-height: 450px; ">
                             <table class="table ">
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>id</th>
+                                        <th>id </th>
                                         <th>Mã xe</th>
-                                        <th>Tên xe</th>
                                         <th>Mã người thuê</th>
-                                        <th>Tên người thuê</th>
-                                        <th>Chủ sở hữu</th>
-                                        <th>Vị trí</th>
-                                        <th>Giá cho thuê</th>
+                                        <th>Số điện thoại</th>
+                                        <th>Email</th>
                                         <th>Ngày bắt đầu</th>
                                         <th>Ngày kết thúc</th>
                                         <th>Trạng thái</th>
                                         <th>Tổng tiền</th>
                                         <th>Thanh toán</th>
                                         <th></th>
-                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach (var item in Model)
+                                    {
                                     <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td><button type="button" class="btn btn-primary" name="sua">Sửa</button></td>
-                                        <td><button type="button" class="btn btn-primary" name="xoa">Xóa</button></td>
+                                        <td>@i</td>
+                                        <td>@item.id</td>
+                                        <td>@item.xe_id</td>
+                                        <td>@item.nsd_id</td>
+                                        <td>@item.sodienthoai</td>
+                                        <td>@item.email</td>
+                                        <td>@item.batdau</td>
+                                        <td>@item.ketthuc</td>
+                                        <td>@item.trangthai</td>
+                                        <td>@item.tongtien</td>
+                                        <td>@item.thanhtoan</td>
+                                        <td><a href="Suanguoidung?Id=@item.id" class="btn btn-primary">Sửa</a></td>
                                     </tr>
-                                </tbody>
+                                        i++;
+                                    }
+                                    </tbody>
                             </table>
                         </div>
                     </div>

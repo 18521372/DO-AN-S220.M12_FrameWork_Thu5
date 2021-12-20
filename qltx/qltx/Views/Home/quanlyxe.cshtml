@@ -3,6 +3,22 @@
     Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 @{
+    @section scripts{
+        <script>
+            $(function () {
+                $('#AlertBox').removeClass('hide');
+                $('#AlertBox').delay(2000).slideUp(500);
+            });
+
+        </script>
+    }
+    @if (TempData["AlertMessage"] != null)
+    {
+        <div id="AlertBox" class="alert @TempData["AlertType"] hide" role="alert" style="text-align:center;">
+            @TempData["AlertMessage"]
+        </div>
+    }
+    var i = 1;
     <html lang="en">
     <head>
         <title>Bootstrap Example</title>
@@ -13,54 +29,62 @@
     </head>
     <body>
         <div class="container mt-3" style="color:white;">
-            <form>
+            <form action="Timxe" method="post">
                 <div class="row">
                     <div class="col">
-                        <input type="text" class="form-control" name="id" placeholder="Nhập id">
+                        <input type="text" class="form-control" name="id_tim" placeholder="Nhập id">
                     </div>
                     <div class="col">
                         <input type="Submit" name="Submit" class="btn btn-primary" value="Tìm">
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            <!-- Start Styles. Move the 'style' tags and everything between them to between the 'head' tags -->
-                            
-                            <!-- End Styles -->
-                            
+                </div>
+            </form>
+            <form>
+                           
+                <div class="row">
+                    <div class="col table-wrapper-scroll-y my-custom-scrollbar" style="height: 50px ;overflow-y: scroll;overflow-x:hidden; min-height: 450px; ">
+                       
 
-                            <table class="table">
-                                <thead>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>id</th>
+                                    <th>Tên xe</th>
+                                    <th>Biển sô</th>
+                                    <th>Thương hiệu</th>
+                                    <th>Chủ sở hữu</th>
+                                    <th>Vị trí</th>
+                                    <th>Giá cho thuê</th>
+                                    <th>Trạng thái</th>
+                                    <th>Ngày đăng</th>
+                                    <th>Loại nhiên liệu</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
                                     <tr>
-                                        <th>No</th>
-                                        <th>id</th>
-                                        <th>Tên xe</th>
-                                        <th>Biển sô</th>
-                                        <th>Thương hiệu</th>
-                                        <th>Chủ sở hữu</th>
-                                        <th>Vị trí</th>
-                                        <th>Giá cho thuê</th>
-                                        <th>Trạng thái</th>
-                                        <th></th>
-                                        <th></th>
+                                        <td>@i</td>
+                                        <td>@item.id</td>
+                                        <td>@item.tenxe</td>
+                                        <td>@item.bienso</td>
+                                        <td>@item.thuonghieu</td>
+                                        <td>@item.csh_id</td>
+                                        <td>@item.vitri</td>
+                                        <td>@item.giathue</td>
+                                        <td>@item.trangthai_id</td>
+                                        <td>@item.ngaythue</td>
+                                        <td>@item.loainhienlieu</td>
+                                        <td><a href="Suaxe?Id=@item.id" class="btn btn-primary">Sửa</a></td>
+                                        <td><a href="Xoaxe?Id=@item.id" class="btn btn-primary">Xóa</a></td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>00</td>
-                                        <td>00</td>
-                                        <td>Hyen</td>
-                                        <td>12-A3 4567</td>
-                                        <td>ford</td>
-                                        <td>122</td>
-                                        <td>Nu</td>
-                                        <td>1000</td>
-                                        <td>ss</td>
-                                        <td><button type="button" class="btn btn-primary" name="sua">Sửa</button></td>
-                                        <td><button type="button" class="btn btn-primary" name="xoa">Xóa</button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                                    i++;
+                                }
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </form>
