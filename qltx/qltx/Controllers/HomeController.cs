@@ -36,6 +36,14 @@ namespace qltx.Controllers
         {
             return View();
         }
+        public IActionResult thongtinxe()
+        {
+            return View();
+        }
+        public IActionResult thuexe()
+        {
+            return View();
+        }
         public IActionResult quanlythanhvien()
         {
             StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
