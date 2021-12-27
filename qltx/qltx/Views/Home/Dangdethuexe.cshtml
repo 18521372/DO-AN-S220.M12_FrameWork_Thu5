@@ -80,8 +80,7 @@
         @i=1
         @foreach (var item in Model)
         {
-            if (@item.csh_id == "US0001")
-            {
+            
                 <div class="modal fade" id="@item.id">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -96,7 +95,7 @@
                                 <form>
                                     <label for="uname" class="form-label">ID:</label>
                                     <div class="mb-3">
-                                        <input type="text" class="form-control" id="id" name="id" value="@item.id">
+                                        <input type="text" class="form-control" id="id" name="id" value="@item.id" readonly>
                                     </div>
                                     <label for="uname" class="form-label">Tên xe:</label>
                                     <div class="mb-3">
@@ -136,7 +135,7 @@
                     </div>
                 </div>
                 i++;
-            }
+            
         }
                 <div class="modal fade" id="myModal">
                     <div class="modal-dialog">

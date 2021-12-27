@@ -133,7 +133,7 @@ namespace qltx.Models
             }
             return list;
         }
-        public List<xe> GetxeCuaNguoiDung()
+        public List<xe> GetxeCuaNguoiDung(string i)
         {
             List<xe> list = new List<xe>();
 
@@ -141,8 +141,10 @@ namespace qltx.Models
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                string str = "select * from xe where csh_id=(select*from dangnhap)";
+                string str = "select * from xe where csh_id=@id";
+                
                 MySqlCommand cmd = new MySqlCommand(str, conn);
+                cmd.Parameters.AddWithValue("id", i);
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
@@ -421,10 +423,10 @@ namespace qltx.Models
                 return deleted;
             }
         }
-        public int Timthanhvien(string email, string password)
+        public nguoidung Timthanhvien(string email, string password)
         {
-            List<nguoidung> list = new List<nguoidung>();
-            int i = 0;
+            nguoidung list = new nguoidung();
+            
             //MySqlConnection conn = new MySqlConnection("server=127.0.0.1;user id=root;password=;port=3306;database=qlsv;");
             using (MySqlConnection conn = GetConnection())
             {
@@ -440,11 +442,12 @@ namespace qltx.Models
                     {
                         eml = reader["email"].ToString();
                         pwd = reader["password"].ToString();
-                        id=reader["id"].ToString();
+                        id = reader["id"].ToString();
                         if (eml == email && password == pwd)
                         {
-                            i = Convert.ToInt32(reader["quyen_id"]);
-                            
+                            list.quyen = Convert.ToInt32(reader["quyen_id"]);
+                            list.id = reader["id"].ToString();
+
                             break;
                         }
                     }
@@ -456,52 +459,16 @@ namespace qltx.Models
                         cmd1.Parameters.AddWithValue("id", id);
                         cmd1.ExecuteNonQuery();
                     }
-                       
+
                     reader.Close();
                 }
 
                 conn.Close();
 
             }
-            return i;
+            return list;
         }
-        /*public string DangNhap(string email, string password)
-        {
-            List<nguoidung> list = new List<nguoidung>();
-            int i = 0;
-            var userSession = new UserLogin();
-            //MySqlConnection conn = new MySqlConnection("server=127.0.0.1;user id=root;password=;port=3306;database=qlsv;");
-            using (MySqlConnection conn = GetConnection())
-            {
-                conn.Open();
-                string str = "select * from nguoidung";
-                MySqlCommand cmd = new MySqlCommand(str, conn);
-                using (var reader = cmd.ExecuteReader())
-                {
-                    string eml = "";
-                    string pwd = "";
-                    while (reader.Read())
-                    {
-                        eml = reader["email"].ToString();
-                        pwd = reader["password"].ToString();
-                        if (eml == email && password == pwd)
-                        {
-                            i = Convert.ToInt32(reader["quyen_id"]);
-                            userSession.quyen = reader["quyen_id"].ToString();
-                            userSession.UserName = reader["id"].ToString();
-                            userSession.UserID = reader["ten"].ToString();
-                            
-                        }
-                    }
-                    reader.Close();
-                }
-
-                conn.Close();
-
-            }
-            return JsonConvert.SerializeObject(userSession);
-        }*/
-            public List<chart> Getsoluongxe()
+        public List<chart> Getsoluongxe()
         {
             List<chart> list = new List<chart>();
 
@@ -511,7 +478,7 @@ namespace qltx.Models
                 conn.Open();
                 string str = "SELECT month(batdau) as thang,COUNT(*) as tong FROM `ctthuexe` GROUP by month(batdau)";
                 MySqlCommand cmd = new MySqlCommand(str, conn);
-               
+
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
@@ -519,7 +486,36 @@ namespace qltx.Models
                         list.Add(new chart()
                         {
                             row = Convert.ToInt32(reader["thang"]),
-                            col= Convert.ToInt32(reader["tong"])
+                            col = Convert.ToInt32(reader["tong"])
+                        });
+                    }
+                    reader.Close();
+                }
+
+                conn.Close();
+
+            }
+            return list;
+        }
+        public List<chart> Getdoanhso()
+        {
+            List<chart> list = new List<chart>();
+
+            //MySqlConnection conn = new MySqlConnection("server=127.0.0.1;user id=root;password=;port=3306;database=qlsv;");
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                string str = "SELECT month(batdau) as thang,sum(tongtien) as tong FROM `ctthuexe` GROUP by month(batdau)";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        list.Add(new chart()
+                        {
+                            row = Convert.ToInt32(reader["thang"]),
+                            col = Convert.ToInt32(reader["tong"])
                         });
                     }
                     reader.Close();
