@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
-
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Session;
+using Newtonsoft.Json;
 
 namespace qltx.Models
 {
@@ -414,7 +417,43 @@ namespace qltx.Models
             }
             return i;
         }
-        public List<chart> Getsoluongxe()
+        public string DangNhap(string email, string password)
+        {
+            List<nguoidung> list = new List<nguoidung>();
+            int i = 0;
+            var userSession = new UserLogin();
+            //MySqlConnection conn = new MySqlConnection("server=127.0.0.1;user id=root;password=;port=3306;database=qlsv;");
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                string str = "select * from nguoidung";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    string eml = "";
+                    string pwd = "";
+                    while (reader.Read())
+                    {
+                        eml = reader["email"].ToString();
+                        pwd = reader["password"].ToString();
+                        if (eml == email && password == pwd)
+                        {
+                            i = Convert.ToInt32(reader["quyen_id"]);
+                            userSession.quyen = reader["quyen_id"].ToString();
+                            userSession.UserName = reader["id"].ToString();
+                            userSession.UserID = reader["ten"].ToString();
+                            
+                        }
+                    }
+                    reader.Close();
+                }
+
+                conn.Close();
+
+            }
+            return JsonConvert.SerializeObject(userSession);
+        }
+            public List<chart> Getsoluongxe()
         {
             List<chart> list = new List<chart>();
 
