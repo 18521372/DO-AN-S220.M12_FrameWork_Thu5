@@ -34,7 +34,11 @@ namespace qltx.Controllers
         }
         public IActionResult Dangdethuexe()
         {
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            List<xe> kh = context.GetxeCuaNguoiDung();
+            ViewData.Model = kh;
             return View();
+
         }
         public IActionResult thongtinxe()
         {

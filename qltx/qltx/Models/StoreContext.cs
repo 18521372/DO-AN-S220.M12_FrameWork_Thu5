@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Session;
-using Newtonsoft.Json;
+/*using Newtonsoft.Json;*/
 
 namespace qltx.Models
 {
@@ -105,6 +105,43 @@ namespace qltx.Models
             {
                 conn.Open();
                 string str = "select * from xe ";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        list.Add(new xe()
+                        {
+                            id = reader["id"].ToString(),
+                            csh_id = reader["csh_id"].ToString(),
+                            tenxe = reader["tenxe"].ToString(),
+                            thuonghieu = reader["thuonghieu"].ToString(),
+                            vitri = reader["vitri"].ToString(),
+                            giathue = Convert.ToInt32(reader["giathue"]),
+                            bienso = reader["bienso"].ToString(),
+                            ngaythue = Convert.ToDateTime(reader["ngaythue"]),
+                            trangthai_id = reader["trangthai_id"].ToString(),
+                            loainhienlieu = reader["loainhienlieu"].ToString(),
+
+                        });
+                    }
+                    reader.Close();
+                }
+
+                conn.Close();
+
+            }
+            return list;
+        }
+        public List<xe> GetxeCuaNguoiDung()
+        {
+            List<xe> list = new List<xe>();
+
+            //MySqlConnection conn = new MySqlConnection("server=127.0.0.1;user id=root;password=;port=3306;database=qlsv;");
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                string str = "select * from xe where csh_id=(select*from dangnhap)";
                 MySqlCommand cmd = new MySqlCommand(str, conn);
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -428,7 +465,7 @@ namespace qltx.Models
             }
             return i;
         }
-        public string DangNhap(string email, string password)
+        /*public string DangNhap(string email, string password)
         {
             List<nguoidung> list = new List<nguoidung>();
             int i = 0;
@@ -463,7 +500,7 @@ namespace qltx.Models
 
             }
             return JsonConvert.SerializeObject(userSession);
-        }
+        }*/
             public List<chart> Getsoluongxe()
         {
             List<chart> list = new List<chart>();

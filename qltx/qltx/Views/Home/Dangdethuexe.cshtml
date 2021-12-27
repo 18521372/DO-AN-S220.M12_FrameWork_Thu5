@@ -52,24 +52,21 @@
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
-                                        if (@item.csh_id == "US0001")
-                                        {
-                                            <tr>
-                                                <td>@i</td>
-                                                <td>@item.id</td>
-                                                <td>@item.tenxe</td>
-                                                <td>@item.bienso</td>
-                                                <td>@item.thuonghieu</td>
-                                                <td>@item.vitri</td>
-                                                <td>@item.giathue</td>
-                                                <td>@item.trangthai_id</td>
-                                                <td>@item.ngaythue</td>
-                                                <td>@item.loainhienlieu</td>
-                                                <td><button type="button" class="btn btn-primary" name="sua" data-bs-toggle="modal" data-bs-target="@("#"+item.id)">Sửa</button></td>
-                                                <td><a href="Xoaxe?Id=@item.id" class="btn btn-primary">Xóa</a></td>
-                                            </tr>
-                                            i++;
-                                        }
+                                        <tr>
+                                            <td>@i</td>
+                                            <td>@item.id</td>
+                                            <td>@item.tenxe</td>
+                                            <td>@item.bienso</td>
+                                            <td>@item.thuonghieu</td>
+                                            <td>@item.vitri</td>
+                                            <td>@item.giathue</td>
+                                            <td>@item.trangthai_id</td>
+                                            <td>@item.ngaythue</td>
+                                            <td>@item.loainhienlieu</td>
+                                            <td><button type="button" class="btn btn-primary" name="sua" data-bs-toggle="modal" data-bs-target="@("#"+item.id)">Sửa</button></td>
+                                            <td><a href="Xoaxe?Id=@item.id" class="btn btn-primary">Xóa</a></td>
+                                        </tr>
+                                        i++;
                                     }
 
                                 </tbody>
