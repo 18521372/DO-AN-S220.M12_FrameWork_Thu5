@@ -63,8 +63,7 @@ namespace qltx.Models
         public List<thuexe> Getthuexe()
         {
             List<thuexe> list = new List<thuexe>();
-
-            //MySqlConnection conn = new MySqlConnection("server=127.0.0.1;user id=root;password=;port=3306;database=qlsv;");
+       
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
@@ -399,16 +398,28 @@ namespace qltx.Models
                 {
                     string eml = "";
                     string pwd = "";
+                    string id = "";
                     while (reader.Read())
                     {
                         eml = reader["email"].ToString();
                         pwd = reader["password"].ToString();
+                        id=reader["id"].ToString();
                         if (eml == email && password == pwd)
                         {
                             i = Convert.ToInt32(reader["quyen_id"]);
+                            
                             break;
                         }
                     }
+                    reader.Close();
+                    if (eml == email && password == pwd)
+                    {
+                        string str1 = "update dangnhap set mand=@id";
+                        MySqlCommand cmd1 = new MySqlCommand(str1, conn);
+                        cmd1.Parameters.AddWithValue("id", id);
+                        cmd1.ExecuteNonQuery();
+                    }
+                       
                     reader.Close();
                 }
 

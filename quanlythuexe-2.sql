@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost:3307
--- Thời gian đã tạo: Th12 13, 2021 lúc 11:55 AM
+-- Thời gian đã tạo: Th12 20, 2021 lúc 04:06 PM
 -- Phiên bản máy phục vụ: 10.4.19-MariaDB
 -- Phiên bản PHP: 8.0.6
 
@@ -52,7 +52,7 @@ INSERT INTO `ctthuexe` (`id`, `sodienthoai`, `email`, `batdau`, `ketthuc`, `tran
 ('THUE0008', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt', 70000000, 'da thanh toan'),
 ('THUE0009', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt', 50000000, 'da thanh toan'),
 ('THUE0010', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt', 40000000, 'da thanh toan'),
-('THUE0011', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt', 95000000, 'da thanh toan'),
+('THUE0011', '0124124412', 'avas@gmail.com', '2021-10-21', '2021-10-29', 'kt', 95000000, 'da thanh toan'),
 ('THUE0012', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt', 80000000, 'da thanh toan'),
 ('THUE0013', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt', 76000000, 'da thanh toan'),
 ('THUE0014', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt', 65000000, 'da thanh toan'),
@@ -62,6 +62,23 @@ INSERT INTO `ctthuexe` (`id`, `sodienthoai`, `email`, `batdau`, `ketthuc`, `tran
 ('THUE0018', '0124124412', 'avas@gmail.com', '2021-11-23', '2021-11-30', 'kt', 100000000, 'da thanh toan'),
 ('THUE0019', '0984566378', 'cuc123@gmail.com', '2021-12-16', '2021-12-22', 'kt', 9000000, 'da thanh toan'),
 ('THUE0020', '0984566378', 'cuc123@gmail.com', '2021-11-16', '2021-11-22', 'kt', 9000000, 'da thanh toan');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `dangnhap`
+--
+
+CREATE TABLE `dangnhap` (
+  `mand` varchar(10) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `dangnhap`
+--
+
+INSERT INTO `dangnhap` (`mand`) VALUES
+('US0006');
 
 -- --------------------------------------------------------
 
