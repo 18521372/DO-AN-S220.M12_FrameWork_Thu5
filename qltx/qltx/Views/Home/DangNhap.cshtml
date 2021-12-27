@@ -34,7 +34,14 @@
                 <div class="col-4"></div>
 
                 <div class="col-4 span">
-                    <h2 style="color:white;">Đăng nhập</h2>
+                    <h2 style="color:white;" onclick="if (typeof(Storage) !== "undefined") 
+                    {
+                        var domain = 'viblo.asia';
+                        localStorage.setItem('domain', domain);
+                    } else 
+                    {
+                        document.write('Trình duyệt của bạn không hỗ trợ local storage');
+                    }">Đăng nhập</h2>
 
 
                     <form method="post" action="../Home/DN">
