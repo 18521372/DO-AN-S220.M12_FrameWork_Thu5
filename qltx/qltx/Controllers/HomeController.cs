@@ -170,6 +170,22 @@ namespace qltx.Controllers
             return View("quanlyxe");
 
         }
+        public IActionResult XoaxeCuaNguoiDung(string id)
+        {
+
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            int[] count = context.Xoaxe(id);
+            if (count.Length != 0)
+            {
+                TempData["AlertMessage"] = "Xóa thành công";
+                TempData["AlertType"] = "alert-success";
+            }
+            context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            List<xe> kh = context.GetxeCuaNguoiDung();
+            ViewData.Model = kh;
+            return View("Dangdethuexe");
+
+        }
         public IActionResult quanlyxe()
         {
             StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;

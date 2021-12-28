@@ -64,7 +64,7 @@
                                             <td>@item.ngaythue</td>
                                             <td>@item.loainhienlieu</td>
                                             <td><button type="button" class="btn btn-primary" name="sua" data-bs-toggle="modal" data-bs-target="@("#"+item.id)">Sửa</button></td>
-                                            <td><a href="Xoaxe?Id=@item.id" class="btn btn-primary">Xóa</a></td>
+                                            <td><a href="XoaxeCuaNguoiDung?Id=@item.id" class="btn btn-primary">Xóa</a></td>
                                         </tr>
                                         i++;
                                     }
@@ -85,15 +85,15 @@
                 <div class="modal fade" id="@item.id">
                     <div class="modal-dialog">
                         <div class="modal-content">
+                            <form>
 
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                                <h4 class="modal-title" style="color:#000000;">Sửa thông tin xe</h4>
-                            </div>
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title" style="color:#000000;">Sửa thông tin xe</h4>
+                                </div>
 
-                            <!-- Modal body -->
-                            <div class="modal-body">
-                                <form>
+                                <!-- Modal body -->
+                                <div class="modal-body">
                                     <label for="uname" class="form-label">ID:</label>
                                     <div class="mb-3">
                                         <input type="text" class="form-control" id="id" name="id" value="@item.id">
@@ -122,15 +122,15 @@
                                     <div class="mb-3">
                                         <input type="text" class="form-control" id="nhienlieu" name="nhienlieu" value="@item.loainhienlieu">
                                     </div>
+                                </div>
 
-                                </form>
-                            </div>
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary">sửa</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                </div>
 
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-primary">sửa</button>
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                            </div>
+                            </form>
 
                         </div>
                     </div>
@@ -141,15 +141,15 @@
                 <div class="modal fade" id="myModal">
                     <div class="modal-dialog">
                         <div class="modal-content">
+                            <form>
 
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                                <h4 class="modal-title">Thêm xe mới</h4>
-                            </div>
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Thêm xe mới</h4>
+                                </div>
 
-                            <!-- Modal body -->
-                            <div class="modal-body">
-                                <form>
+                                <!-- Modal body -->
+                                <div class="modal-body">
                                     <div class="mb-3 mt-3">
                                         <input type="text" class="form-control" id="No" placeholder="No" name="hoten">
                                     </div>
@@ -174,14 +174,14 @@
                                     <div class="mb-3">
                                         <input type="number" class="form-control" id="tinhtrang" placeholder="Tình trạng" name="tinhtrang">
                                     </div>
+                                </div>
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary">thêm xe</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                </div>
 
-                                </form>
-                            </div>
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-primary">thêm xe</button>
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
