@@ -40,7 +40,7 @@ namespace qltx.Controllers
         public IActionResult Dangdethuexe()
         {
             StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
-            string i= HttpContext.Session.GetString(SessionName);
+            string i = HttpContext.Session.GetString(SessionName);
             List<xe> kh = context.GetxeCuaNguoiDung(i);
             ViewData.Model = kh;
             ViewBag.Name = HttpContext.Session.GetString(SessionName);
@@ -188,7 +188,8 @@ namespace qltx.Controllers
                 TempData["AlertType"] = "alert-success";
             }
             context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
-            List<xe> kh = context.GetxeCuaNguoiDung();
+            string i = HttpContext.Session.GetString(SessionName);
+            List<xe> kh = context.GetxeCuaNguoiDung(i);
             ViewData.Model = kh;
             return View("Dangdethuexe");
 
