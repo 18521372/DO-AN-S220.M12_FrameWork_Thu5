@@ -27,14 +27,20 @@ namespace qltx
         {
             services.AddControllersWithViews();
             services.AddMvc();
+            services.AddMvc()
+        .AddSessionStateTempDataProvider();
+            services.AddSession();
             services.Add(new ServiceDescriptor(typeof(StoreContext),
             new StoreContext(Configuration.GetConnectionString("DefaultConnection"))));
+
         }
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -49,8 +55,9 @@ namespace qltx
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseSession();
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {

@@ -37,17 +37,26 @@
         var i = 0;
         const ro = new Array();
         const co = new Array();
-
+        const ro1 = new Array();
+        const co1 = new Array();
     </script>
 
     @if (ViewData["xe"] != null)
         @foreach (var item in ViewData["xe"] as List<chart>)
         {
             <script>
-
-
-            ro.push(@item.row);
+        ro.push(@item.row);
             co.push(@item.col);
+            i++;
+            </script>
+
+        }
+    @if (ViewData["xe1"] != null)
+        @foreach (var item in ViewData["xe1"] as List<chart>)
+        {
+            <script>
+                ro1.push(@item.row);
+            co1.push(@item.col);
             i++;
             </script>
 
@@ -63,11 +72,11 @@
             <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
         </div>
         <div class="col">
-            <canvas id="myChart1" style="width:100%;max-width:300px"></canvas>
+            <canvas id="myChart1" style="width:100%;max-width:600px"></canvas>
         </div>
     </div>
-    
-    
+
+
     <script>
         var i = 0;
         var col = new Int32Array(2);
@@ -81,14 +90,14 @@
 
         var yValues = co;
         var barColors = ["red", "green", "blue", "orange", "brown"];
-        var text = ["while"];
+        var text = [""];
         new Chart("myChart", {
-            type: "bar",
+            type: "line",
             data: {
                 labels: xValues,
                 datasets: [{
-                    backgroundColor: barColors,
-                    fillColor: "rgba(255, 89, 114, 0.6)",
+                    borderColor: "rgba(0,0,255,255)",
+                    fillColor: "rgba(0,0,255,0.5)",
 
                     data: yValues
                 }]
@@ -102,34 +111,47 @@
                 }
             }
         });
-        
-            var xValues = ro;
-            var yValues = co;
-            var barColors = [
+
+        var xValues = ro1;
+        var yValues = co1;
+        var barColors = [
             "#b91d47",
             "#00aba9",
             "#2b5797",
+            '#839192',
             "#e8c3b9",
-            "#1e7145"
-            ];
+            '#85C1E9',
+            "#1e7145",
+            '#A93226',
+            '#D0D3D4',
+            '#283747',
+            '#FCF3CF',
+            '#85C1E9',
+            '#A93226',
+            "#b91d47",
+            "#00aba9",
+            "#2b5797",
+            "#e8c3b9"
+        ];
 
-new Chart("myChart1", {
-                type: "pie",
-      data: {
+        new Chart("myChart1", {
+            type: "bar",
+            data: {
                 labels: xValues,
-        datasets: [{
-                backgroundColor: barColors,
-          data: yValues
-        }]
-      },
-      options: {
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                }]
+            },
+            options: {
+                legend: { display: false },
                 title: {
-                display: true,
-          text: "World Wide Wine Production 2018"
-        }
-      }
-});
-    
+                    display: true,
+                    text: "Doanh số mỗi tháng"
+                }
+            }
+        });
+
     </script>
 
 </body>
@@ -152,7 +174,7 @@ new Chart("myChart1", {
                         <th>Số thẻ</th>
                         <th>Giới tính</th>
                         <th>Số lần thuê</th>
-                      
+
 
                     </tr>
                 </thead>
@@ -169,7 +191,7 @@ new Chart("myChart1", {
                             <td>@item.id_card</td>
                             <td>@item.gioitinh</td>
                             <td>@item.quyen</td>
-                           
+
                         </tr>
                         i++;
                     }

@@ -1,16 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+﻿
 using qltx.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+
 
 namespace qltx.Controllers
 {
     public class HomeController : Controller
     {
+
+        string SessionName = "_Name";
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -35,8 +40,10 @@ namespace qltx.Controllers
         public IActionResult Dangdethuexe()
         {
             StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
-            List<xe> kh = context.GetxeCuaNguoiDung();
+            string i= HttpContext.Session.GetString(SessionName);
+            List<xe> kh = context.GetxeCuaNguoiDung(i);
             ViewData.Model = kh;
+            ViewBag.Name = HttpContext.Session.GetString(SessionName);
             return View();
 
         }
@@ -258,6 +265,8 @@ namespace qltx.Controllers
             int tongxedt = context.tongxedt();
             ViewData["tongxedt"] = tongxedt;
             ViewData["xe"] = list;
+            list = context.Getdoanhso();
+            ViewData["xe1"] = list;
             ViewData["nd"] = nd;
             return View();
         }
@@ -277,14 +286,20 @@ namespace qltx.Controllers
         }
         public IActionResult DN(string email, string password)
         {
+
             StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
-            int id = context.Timthanhvien(email, password);      
-            if (id == 1) return View("DN1");
-            if (id == 2) 
+            nguoidung nd = context.Timthanhvien(email, password);
+            if (nd.quyen == 1)
             {
-                 context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+                HttpContext.Session.SetString(SessionName, nd.id);
+                return View("DN1");
+            }
+            if (nd.quyen == 2)
+            {
+                HttpContext.Session.SetString(SessionName, nd.id);
+                context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
                 List<chart> list = context.Getsoluongxe();
-                List<nguoidung> nd = context.thuenhieunhat();
+                List<nguoidung> nd1 = context.thuenhieunhat();
                 int tongxe = context.tongxe();
                 ViewData["tongxe"] = tongxe;
                 int tongxedt = context.tongxedt();
@@ -292,14 +307,17 @@ namespace qltx.Controllers
                 int tongnd = context.tongnd();
                 ViewData["tongnd"] = tongnd;
                 ViewData["xe"] = list;
-                ViewData["nd"] = nd;
-                return View("DN2"); 
+                list = context.Getdoanhso();
+                ViewData["xe1"] = list;
+                ViewData["nd"] = nd1;
+                return View("DN2");
             }
             TempData["AlertMessage"] = "Tài khoản hoặc mật khẩu không đúng!";
             TempData["AlertType"] = "alert-warning";
 
             return View("DangNhap");
         }
+    
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
