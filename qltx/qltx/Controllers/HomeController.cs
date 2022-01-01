@@ -270,15 +270,15 @@ namespace qltx.Controllers
             ViewData["xe1"] = list;
             ViewData["nd"] = nd;
             return View();
+        
         }
-        public IActionResult Profile()
-        {
-            return View();
-        }
-        public IActionResult HopDong1()
+        public IActionResult HopDong()
         {
             ViewBag.i = 1;
-            return View("HopDong");
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            string i = HttpContext.Session.GetString(SessionName);
+            ViewBag.Name = HttpContext.Session.GetString(SessionName);
+            return View(context.ViewHopDong(i));
         }
         public IActionResult HopDong2()
         {
@@ -325,5 +325,37 @@ namespace qltx.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult Profile(string Id)
+        {
+
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            string i = HttpContext.Session.GetString(SessionName);
+            nguoidung nd = context.ViewUser(i);
+            ViewData.Model = nd;
+            ViewBag.Name = HttpContext.Session.GetString(SessionName);
+            return View();
+        }
+
+        public IActionResult CapNhatUser(nguoidung nd)
+        {
+            int count;
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            count = context.UpdateUser(nd);
+
+            if (count > 0)
+            {
+                TempData["AlertMessage"] = "Cập nhật thành công";
+                TempData["AlertType"] = "alert-success";
+            }
+            else
+            {
+                TempData["AlertMessage"] = "Cập nhật không thành công";
+                TempData["AlertType"] = "alert-danger";
+            }
+            return View();
+        }
+
+
     }
 }

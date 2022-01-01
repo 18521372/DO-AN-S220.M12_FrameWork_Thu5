@@ -7,10 +7,10 @@
     <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">$(UserProfile)\.nuget\packages\</NuGetPackageRoot>
     <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\Administrator\.nuget\packages\</NuGetPackageFolders>
     <NuGetProjectStyle Condition=" '$(NuGetProjectStyle)' == '' ">PackageReference</NuGetProjectStyle>
-    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">5.8.1</NuGetToolVersion>
+    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">5.11.0</NuGetToolVersion>
   </PropertyGroup>
   <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <SourceRoot Include="$([MSBuild]::EnsureTrailingSlash($(NuGetPackageFolders)))" />
+    <SourceRoot Include="C:\Users\Administrator\.nuget\packages\" />
   </ItemGroup>
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
@@ -20,6 +20,7 @@
       <NuGetPackageId>MySql.Data.EntityFramework</NuGetPackageId>
       <NuGetPackageVersion>8.0.27</NuGetPackageVersion>
       <NuGetItemType>Content</NuGetItemType>
+      <Pack>false</Pack>
       <Private>False</Private>
       <Link>app.config.transform</Link>
     </Content>
@@ -27,6 +28,7 @@
       <NuGetPackageId>MySql.Data.EntityFramework</NuGetPackageId>
       <NuGetPackageVersion>8.0.27</NuGetPackageVersion>
       <NuGetItemType>Content</NuGetItemType>
+      <Pack>false</Pack>
       <Private>False</Private>
       <Link>web.config.transform</Link>
     </Content>

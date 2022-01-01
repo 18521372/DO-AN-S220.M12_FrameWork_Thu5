@@ -32,6 +32,9 @@
 
             <form method="post" action="DK">
                 <div class="mb-2 mt-3">
+                    <input type="text" class="form-control" id="id" placeholder="ID" name="id">
+                </div>
+                <div class="mb-2">
                     <input type="text" class="form-control" id="name" placeholder="Họ và tên" name="ten">
                 </div>
                 <div class="mb-2">
@@ -50,7 +53,7 @@
                     <input type="text" class="form-control" id="phone" placeholder="Số điện thoại" name="sodienthoai">
                 </div>
                 <div class="form-check mb-2">
-                    <input type="radio" class="form-check-input" id="male" name="gioitinh" value="Nam" checked>Nam
+                    <input type="radio" class="form-check-input" id="male" name="gioitinh" value="Nam">Nam
                     <label class="form-check-label" for="male"></label>
                 </div>
                 <div class="form-check mb-2">
@@ -59,14 +62,6 @@
                 </div>
                 <div class="mb-2">
                     <input type="password" class="form-control" id="pwd" placeholder="Mật khẩu" name="password">
-                </div>
-                <div class="form-check mb-2">
-                    <input type="radio" class="form-check-input" id="role1" name="quyen" value="1" checked>Thuê
-                    <label class="form-check-label" for="role1"></label>
-                </div>
-                <div class="form-check mb-2">
-                    <input type="radio" class="form-check-input" id="role2" name="quyen" value="2">Cho thuê
-                    <label class="form-check-label" for="role2"></label>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Đăng ký</button>

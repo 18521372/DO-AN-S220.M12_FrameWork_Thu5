@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Session;
+using System.Data;
 /*using Newtonsoft.Json;*/
 
 namespace qltx.Models
@@ -640,8 +641,9 @@ namespace qltx.Models
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                var str = "insert into nguoidung(ten, email, diachi, gioitinh, ngaysinh, id_card, password, sodienthoai, quyen_id) values(@ten, @email, @diachi, @gioitinh, @ngaysinh, @idcard, @password, @sdt, @quyen)";
+                var str = "insert into nguoidung values(@id, @ten, @email, @diachi, @gioitinh, @ngaysinh, @idcard, @password, @sdt, @quyen)";
                 MySqlCommand cmd = new MySqlCommand(str, conn);
+                cmd.Parameters.AddWithValue("id", nd.id);
                 cmd.Parameters.AddWithValue("ten", nd.ten);
                 cmd.Parameters.AddWithValue("email", nd.email);
                 cmd.Parameters.AddWithValue("diachi", nd.diachi);
@@ -650,12 +652,38 @@ namespace qltx.Models
                 cmd.Parameters.AddWithValue("idcard", nd.id_card);
                 cmd.Parameters.AddWithValue("password", nd.password);
                 cmd.Parameters.AddWithValue("sdt", nd.sodienthoai);
-                cmd.Parameters.AddWithValue("quyen", nd.quyen);
+                cmd.Parameters.AddWithValue("quyen", 1);
                 return (cmd.ExecuteNonQuery());
 
             }
         }
-        /*
+
+        public nguoidung ViewUser(string Id)
+        {
+            nguoidung nd = new nguoidung();
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                var str = "select ten, diachi, email, sodienthoai, gioitinh, id from nguoidung where id=@id";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                cmd.Parameters.AddWithValue("id", Id);
+                var reader = cmd.ExecuteReader(CommandBehavior.SingleResult);
+                if(reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        nd.ten = reader.GetString(0);
+                        nd.diachi = reader.GetString(1);
+                        nd.email = reader.GetString(2);
+                        nd.sodienthoai = reader.GetString(3);
+                        nd.gioitinh = reader.GetString(4);
+                        nd.id = reader.GetString(5);
+                    }
+                }
+            }
+            return nd;
+        }
+
         public int UpdateUser(nguoidung nd)
         {
             using (MySqlConnection conn = GetConnection())
@@ -666,11 +694,50 @@ namespace qltx.Models
                 cmd.Parameters.AddWithValue("ten", nd.ten);
                 cmd.Parameters.AddWithValue("diachi", nd.diachi);
                 cmd.Parameters.AddWithValue("email", nd.email);
+                cmd.Parameters.AddWithValue("gioitinh", nd.gioitinh);
                 cmd.Parameters.AddWithValue("sdt", nd.sodienthoai);
                 cmd.Parameters.AddWithValue("id", nd.id);
                 return (cmd.ExecuteNonQuery());
             }
         }
-        */
+
+        public List<object> ViewHopDong(string Id)
+        {
+            List<object> list = new List<object>();
+
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+
+                string str = "SELECT nguoidung.id, tenxe, loainhienlieu, vitri, batdau, ketthuc, motta FROM nguoidung, thuexe, ctthuexe, xe, trangthaithue WHERE nguoidung.id = thuexe.nsd_id AND thuexe.xe_id = xe.id AND thuexe.id = ctthuexe.id AND ctthuexe.trangthai = trangthaithue.id AND nguoidung.id=@id;";
+
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                cmd.Parameters.AddWithValue("id", Id);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var ob = new {
+                            tenxe = reader["tenxe"].ToString(),
+                            loainhienlieu = reader["loainhienlieu"].ToString(),
+                            vitri = reader["vitri"].ToString(),
+                            batdau = Convert.ToDateTime(reader["batdau"]),
+                            ketthuc = Convert.ToDateTime(reader["ketthuc"]),
+                            motta = reader["motta"].ToString(),
+                            id = reader["id"].ToString()
+                        };
+                        list.Add(ob);
+
+                    }
+                    reader.Close();
+                }
+
+                conn.Close();
+
+            }
+            return list;
+        }
+
+
     }
 }

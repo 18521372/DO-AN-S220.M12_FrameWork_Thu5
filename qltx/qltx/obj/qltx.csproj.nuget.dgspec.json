@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Administrator\\source\\repos\\te\\18521372\\DO-AN-S220.M12_FrameWork_Thu5\\qltx\\qltx\\qltx.csproj": {}
+    "D:\\IS220 - Copy\\qltx\\qltx\\qltx.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Administrator\\source\\repos\\te\\18521372\\DO-AN-S220.M12_FrameWork_Thu5\\qltx\\qltx\\qltx.csproj": {
+    "D:\\IS220 - Copy\\qltx\\qltx\\qltx.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Administrator\\source\\repos\\te\\18521372\\DO-AN-S220.M12_FrameWork_Thu5\\qltx\\qltx\\qltx.csproj",
+        "projectUniqueName": "D:\\IS220 - Copy\\qltx\\qltx\\qltx.csproj",
         "projectName": "qltx",
-        "projectPath": "C:\\Users\\Administrator\\source\\repos\\te\\18521372\\DO-AN-S220.M12_FrameWork_Thu5\\qltx\\qltx\\qltx.csproj",
+        "projectPath": "D:\\IS220 - Copy\\qltx\\qltx\\qltx.csproj",
         "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Administrator\\source\\repos\\te\\18521372\\DO-AN-S220.M12_FrameWork_Thu5\\qltx\\qltx\\obj\\",
+        "outputPath": "D:\\IS220 - Copy\\qltx\\qltx\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -83,7 +83,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

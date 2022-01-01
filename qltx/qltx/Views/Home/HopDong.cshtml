@@ -21,19 +21,22 @@
                 <tr>
                     <th scope="col" style="width:20%">Tên xe</th>
                     <th scope="col" style="width:12%">Nhiên liệu</th>
-                    <th scope="col" style="width:15%">Tuyến</th>
+                    <th scope="col" style="width:15%">Vị trí</th>
                     <th scope="col" style="width:20%">Ngày bắt đầu</th>
                     <th scope="col" style="width:20%">Ngày kết thúc</th>
                     <th scope="col" style="width:13%">Trạng thái</th>
                 </tr>
-                <tr>
-                    <td>Audi</td>
-                    <td>Xăng</td>
-                    <td>Tp. HCM</td>
-                    <td>01/01/2021</td>
-                    <td>31/12/2021</td>
-                    <td>active</td>
-                </tr>
+                @foreach (var item in Model)
+                { 
+                    <tr>
+                        <td>@item.GetType().GetProperty("tenxe").GetValue(item, null)</td>
+                        <td>@item.GetType().GetProperty("loainhienlieu").GetValue(item, null)</td>
+                        <td>@item.GetType().GetProperty("vitri").GetValue(item, null)</td>
+                        <td>@item.GetType().GetProperty("batdau").GetValue(item, null)</td>
+                        <td>@item.GetType().GetProperty("ketthuc").GetValue(item, null)</td>
+                        <td>@item.GetType().GetProperty("motta").GetValue(item, null)</td>
+                    </tr>
+                }
             </table>
         </div>
 
