@@ -54,22 +54,22 @@
                     @if (Model.gioitinh == "Nam")
                     {
                         <div class="form-check mb-3">
-                            <input type="radio" class="form-check-input" id="male" name="gioitinh" value="@Model.gioitinh" checked />
+                            <input type="radio" class="form-check-input" id="male" name="gioitinh" value="Nam" checked />
                             <label class="form-check-label text-white" for="male">Nam</label>
                         </div>
                         <div class="form-check mb-3">
-                            <input type="radio" class="form-check-input" id="female" name="gioitinh" >
+                            <input type="radio" class="form-check-input" id="female" name="gioitinh" value="Nu">
                             <label class="form-check-label text-white" for="female">Nữ</label>
                         </div>
                     }
                     else
                     {
                         <div class="form-check mb-3">
-                            <input type="radio" class="form-check-input" id="male" name="gioitinh" >
+                            <input type="radio" class="form-check-input" id="male" name="gioitinh" value="Nam">
                             <label class="form-check-label text-white" for="male">Nam</label>
                         </div>
                         <div class="form-check mb-3">
-                            <input type="radio" class="form-check-input" id="female" name="gioitinh" value="@Model.gioitinh" checked/>
+                            <input type="radio" class="form-check-input" id="female" name="gioitinh" value="Nu" checked/>
                             <label class="form-check-label text-white" for="female">Nữ</label>
                         </div>
                     }
