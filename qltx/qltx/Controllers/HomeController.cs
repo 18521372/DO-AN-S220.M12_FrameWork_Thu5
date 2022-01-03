@@ -47,10 +47,25 @@ namespace qltx.Controllers
             return View();
 
         }
+        public IActionResult Pagethongtinxe(int Page)
+        {
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            List<xe> kh = context.Getxe();
+            ViewData.Model = kh;
+            TempData["Page"] = Page;
+            //StoreContext context = new StoreContext("server=127.0.0.1;user id=root;password=;port=3307;database=quanlythuexe;");
+            return View("thongtinxe");
+        }
         public IActionResult thongtinxe()
         {
-            return View();
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            List<xe> kh = context.Getxe();
+            ViewData.Model = kh;
+            TempData["Page"] = 6;
+            //StoreContext context = new StoreContext("server=127.0.0.1;user id=root;password=;port=3307;database=quanlythuexe;");
+            return View("thongtinxe");
         }
+
         public IActionResult thuexe()
         {
             return View();
