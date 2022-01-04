@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "h1QrGHy2pbobOIvKbRoeOv99wDn6Jr50y2rKaBn3oBtn4aCjfCRurzdNzdKQIzDstaUhcO4ZVu9ItHLD7Gythg==",
+  "dgSpecHash": "B1WUb7vO/bGdtfby0turun8FpNRH7Ov5V8ACh/FMEOXr9cpnb/ciHMsysFThFLm9Ev4pDH1CAzy88drvz+wYEQ==",
   "success": true,
-  "projectFilePath": "D:\\IS220 - Copy\\qltx\\qltx\\qltx.csproj",
+  "projectFilePath": "C:\\Users\\Administrator\\Source\\Repos\\DO-AN-S220.M12_FrameWork_Thu5\\qltx\\qltx\\qltx.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Administrator\\.nuget\\packages\\bouncycastle.netcore\\1.8.5\\bouncycastle.netcore.1.8.5.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",

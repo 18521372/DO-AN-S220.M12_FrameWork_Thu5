@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\IS220 - Copy\\qltx\\qltx\\qltx.csproj": {}
+    "C:\\Users\\Administrator\\Source\\Repos\\DO-AN-S220.M12_FrameWork_Thu5\\qltx\\qltx\\qltx.csproj": {}
   },
   "projects": {
-    "D:\\IS220 - Copy\\qltx\\qltx\\qltx.csproj": {
+    "C:\\Users\\Administrator\\Source\\Repos\\DO-AN-S220.M12_FrameWork_Thu5\\qltx\\qltx\\qltx.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\IS220 - Copy\\qltx\\qltx\\qltx.csproj",
+        "projectUniqueName": "C:\\Users\\Administrator\\Source\\Repos\\DO-AN-S220.M12_FrameWork_Thu5\\qltx\\qltx\\qltx.csproj",
         "projectName": "qltx",
-        "projectPath": "D:\\IS220 - Copy\\qltx\\qltx\\qltx.csproj",
+        "projectPath": "C:\\Users\\Administrator\\Source\\Repos\\DO-AN-S220.M12_FrameWork_Thu5\\qltx\\qltx\\qltx.csproj",
         "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "D:\\IS220 - Copy\\qltx\\qltx\\obj\\",
+        "outputPath": "C:\\Users\\Administrator\\Source\\Repos\\DO-AN-S220.M12_FrameWork_Thu5\\qltx\\qltx\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",

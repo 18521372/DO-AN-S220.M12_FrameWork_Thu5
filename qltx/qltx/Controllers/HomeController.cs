@@ -354,6 +354,7 @@ namespace qltx.Controllers
 
         public IActionResult CapNhatUser(nguoidung nd)
         {
+            ViewData.Model = nd;
             int count;
             StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
             count = context.UpdateUser(nd);
@@ -368,7 +369,7 @@ namespace qltx.Controllers
                 TempData["AlertMessage"] = "Cập nhật không thành công";
                 TempData["AlertType"] = "alert-danger";
             }
-            return View();
+            return View("Profile");
         }
 
 
