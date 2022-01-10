@@ -391,6 +391,33 @@ namespace qltx.Models
                 return (cmd.ExecuteNonQuery());
             }
         }
+        internal int InsertXe(xe xcnd)
+        {
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                var str = "insert into xe values(@id,@csh_id,@tenxe,@thuonghieu,@vitri,@bienso,@giathue,@ngaythue,@trangthai_id,@loainhienlieu)";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                string str2 = "select count(*) as soxe from xe ";
+                MySqlCommand cmd2 = new MySqlCommand(str2, conn);
+                int id=0;
+                using (var reader = cmd2.ExecuteReader())
+                {
+                    if (reader.Read()) { id = Convert.ToInt32(reader["soxe"]); }
+                }
+                cmd.Parameters.AddWithValue("id", "XE"+id);
+                cmd.Parameters.AddWithValue("csh_id", xcnd.csh_id);
+                cmd.Parameters.AddWithValue("tenxe", xcnd.tenxe);
+                cmd.Parameters.AddWithValue("thuonghieu", xcnd.thuonghieu);
+                cmd.Parameters.AddWithValue("vitri", xcnd.vitri);
+                cmd.Parameters.AddWithValue("bienso", xcnd.bienso);
+                cmd.Parameters.AddWithValue("giathue", xcnd.giathue);
+                cmd.Parameters.AddWithValue("ngaythue", DateTime.Today);
+                cmd.Parameters.AddWithValue("trangthai_id", xcnd.trangthai_id);
+                cmd.Parameters.AddWithValue("loainhienlieu", xcnd.loainhienlieu);
+                return (cmd.ExecuteNonQuery());
+            }
+        }
 
         public int[] Xoahangxe(string makh)
         {

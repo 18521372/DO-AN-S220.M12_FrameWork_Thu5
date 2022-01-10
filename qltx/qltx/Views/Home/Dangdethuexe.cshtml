@@ -63,7 +63,7 @@
                                             <td>@item.trangthai_id</td>
                                             <td>@item.ngaythue</td>
                                             <td>@item.loainhienlieu</td>
-                                            <td><button type="button" class="btn btn-primary" name="sua" data-bs-toggle="modal" data-bs-target="@("#"+item.id)">Sửa</button></td>
+                                            <td><button type="button" class="btn btn-primary" name="sua" data-bs-toggle="modal" data-bs-target="@("#" + item.id)">Sửa</button></td>
                                             <td><a href="XoaxeCuaNguoiDung?Id=@item.id" class="btn btn-primary">Xóa</a></td>
                                         </tr>
                                         i++;
@@ -80,7 +80,7 @@
         @i=1
         @foreach (var item in Model)
         {
-            
+
                 <div class="modal fade" id="@item.id">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -145,13 +145,13 @@
                         </div>
                     </div>
                 </div>
-                i++;
-            
+            i++;
+
         }
                 <div class="modal fade" id="myModal">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <form>
+                            <form method="get" action="ThemXe">
 
                                 <!-- Modal Header -->
                                 <div class="modal-header">
@@ -160,34 +160,67 @@
 
                                 <!-- Modal body -->
                                 <div class="modal-body">
-                                    <div class="mb-3 mt-3">
-                                        <input type="text" class="form-control" id="No" placeholder="No" name="hoten">
+                                    <div class="mb-3">
+                                        <input type="hidden" class="form-control" id="_id" name="id" readonly>
                                     </div>
                                     <div class="mb-3">
-                                        <input type="text" class="form-control" id="id" placeholder="ID" name="id">
+                                        <input type="hidden" class="form-control" id="_csh_id" name="csh_id" value="@TempData["Usid"]" readonly>
+                                    </div>
+                                    <label for="uname" class="form-label">Tên xe:</label>
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" id="_tenxe" name="tenxe">
+                                    </div>
+                                    <label for="uname" class="form-label">Biển số:</label>
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" id="_bienso" name="bienso">
+                                    </div>
+                                    <label for="uname" class="form-label">Thương Hiệu:</label>
+                                    <div class="mb-3">
+                                        <select class="form-control" id="_thuonghieu" name="thuonghieu">
+                                            <option value="0">--chọn hảng xe--</option>
+                                            @foreach (var item in ViewBag.thuonghieuchodangky)
+                                            {
+                                                <option value="@item.id">@item.tenth</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <label for="uname" class="form-label">Vị trí:</label>
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" id="_vitri" name="vitri">
                                     </div>
                                     <div class="mb-3">
-                                        <input type="email" class="form-control" id="tenxe" placeholder="tên xe" name="tenxe">
+                                        <input type="hidden" class="form-control" id="_trangthai_id" name="trangthai_id" value="cd">
+                                    </div>
+                                    <label for="uname" class="form-label">Nhiên liệu:</label>
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" id="_loainhienlieu" name="loainhienlieu">
+                                    </div>
+                                    <label for="uname" class="form-label">Giá Thuê:</label>
+                                    <div class="mb-3">
+                                        <input type="number" class="form-control" id="_giathue" name="giathue">
                                     </div>
                                     <div class="mb-3">
-                                        <input type="number" class="form-control" id="bienso" placeholder="biển số" name="bienso">
+                                        <input type="hidden" class="form-control" id="current-time" name="ngaythue" value="" readonly>
                                     </div>
-                                    <div class="mb-3">
-                                        <input type="number" class="form-control" id="thuonghieu" placeholder="Thương Hiệu" name="thuonghieu">
-                                    </div>
-                                    <div class="mb-3 mt-3">
-                                        <input type="text" class="form-control" id="chusohuu" placeholder="Chủ sở hửu" name="hoten">
-                                    </div>
-                                    <div class="mb-3">
-                                        <input type="text" class="form-control" id="vitri" placeholder="vị trí" name="">
-                                    </div>
-                                    <div class="mb-3">
-                                        <input type="number" class="form-control" id="tinhtrang" placeholder="Tình trạng" name="tinhtrang">
-                                    </div>
+                                    <script>
+                                        var curDate = new Date();
+
+                                        // Ngày hiện tại
+                                        var curDay = curDate.getDate();
+
+                                        // Tháng hiện tại
+                                        var curMonth = curDate.getMonth() + 1;
+
+                                        // Năm hiện tại
+                                        var curYear = curDate.getFullYear();
+
+                                        // Gán vào thẻ HTML
+                                        document.getElementById('current-time').innerHTML = curDay + "/" + curMonth + "/" + curYear;
+                                    </script>
                                 </div>
                                 <!-- Modal footer -->
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary">thêm xe</button>
+                                    <button type="submit" class="btn btn-primary">thêm xe</button>
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                                 </div>
 
