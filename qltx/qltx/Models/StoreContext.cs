@@ -371,6 +371,27 @@ namespace qltx.Models
                 return deleted;
             }
         }
+
+        internal int UpdateXe(xe xcnd)
+        {
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                var str = "update xe set   tenxe=@tenxe, thuonghieu=@thuonghieu, vitri=@vitri, bienso=@bienso, giathue=@giathue, ngaythue=@ngaythue, trangthai_id=@trangthai_id, loainhienlieu=@loainhienlieu where id=@id";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                cmd.Parameters.AddWithValue("id", xcnd.id);
+                cmd.Parameters.AddWithValue("tenxe",xcnd.tenxe);
+                cmd.Parameters.AddWithValue("thuonghieu", xcnd.thuonghieu);
+                cmd.Parameters.AddWithValue("vitri", xcnd.vitri);
+                cmd.Parameters.AddWithValue("bienso", xcnd.bienso);
+                cmd.Parameters.AddWithValue("giathue", xcnd.giathue);
+                cmd.Parameters.AddWithValue("ngaythue", xcnd.ngaythue);
+                cmd.Parameters.AddWithValue("trangthai_id", xcnd.trangthai_id);
+                cmd.Parameters.AddWithValue("loainhienlieu", xcnd.loainhienlieu);
+                return (cmd.ExecuteNonQuery());
+            }
+        }
+
         public int[] Xoahangxe(string makh)
         {
             using (MySqlConnection conn = GetConnection())
@@ -477,7 +498,7 @@ namespace qltx.Models
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                string str = "SELECT month(batdau) as thang,COUNT(*) as tong FROM `ctthuexe` GROUP by month(batdau)";
+                string str = "SELECT month(batdau) as thang,COUNT(*) as tong FROM ctthuexe GROUP by month(batdau)";
                 MySqlCommand cmd = new MySqlCommand(str, conn);
 
                 using (var reader = cmd.ExecuteReader())
@@ -506,7 +527,7 @@ namespace qltx.Models
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                string str = "SELECT month(batdau) as thang,sum(tongtien) as tong FROM `ctthuexe` GROUP by month(batdau)";
+                string str = "SELECT month(batdau) as thang,sum(tongtien) as tong FROM ctthuexe GROUP by month(batdau)";
                 MySqlCommand cmd = new MySqlCommand(str, conn);
 
                 using (var reader = cmd.ExecuteReader())

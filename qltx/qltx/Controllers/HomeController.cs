@@ -41,6 +41,7 @@ namespace qltx.Controllers
         {
             StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
             string i = HttpContext.Session.GetString(SessionName);
+            TempData["Usid"] = i;
             List<xe> kh = context.GetxeCuaNguoiDung(i);
             ViewData.Model = kh;
             ViewBag.Name = HttpContext.Session.GetString(SessionName);
@@ -204,8 +205,10 @@ namespace qltx.Controllers
             }
             context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
             string i = HttpContext.Session.GetString(SessionName);
+            TempData["Usid"] = i;
             List<xe> kh = context.GetxeCuaNguoiDung(i);
             ViewData.Model = kh;
+            ViewBag.Name = HttpContext.Session.GetString(SessionName);
             return View("Dangdethuexe");
 
         }
@@ -371,7 +374,33 @@ namespace qltx.Controllers
             }
             return View("Profile");
         }
+        public IActionResult CapNhatXe(xe xcnd)
+        {
+            int count;
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            count = context.UpdateXe(xcnd);
+
+            if (count > 0)
+            {
+                TempData["AlertMessage"] = "Cập nhật thành công";
+                TempData["AlertType"] = "alert-success";
+            }
+            else
+            {
+                TempData["AlertMessage"] = "Cập nhật không thành công";
+                TempData["AlertType"] = "alert-danger";
+            }
+            string i = HttpContext.Session.GetString(SessionName);
+            TempData["Usid"] = i;
+            List<xe> kh = context.GetxeCuaNguoiDung(i);
+            ViewData.Model = kh;
+            ViewBag.Name = HttpContext.Session.GetString(SessionName);
+            return View("Dangdethuexe");
+        }
 
 
     }
+    
+
+
 }

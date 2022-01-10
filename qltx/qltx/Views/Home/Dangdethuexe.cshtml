@@ -84,7 +84,7 @@
                 <div class="modal fade" id="@item.id">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <form>
+                            <form method="get" action="CapNhatXe">
 
                                 <!-- Modal Header -->
                                 <div class="modal-header">
@@ -95,37 +95,48 @@
                                 <div class="modal-body">
                                     <label for="uname" class="form-label">ID:</label>
                                     <div class="mb-3">
-                                        <input type="text" class="form-control" id="id" name="id" value="@item.id" readonly>
+                                        <input type="text" class="form-control" id="_id" name="id" value="@item.id" readonly>
+                                    </div>
+                                    <div class="mb-3">
+                                        <input type="hidden" class="form-control" id="_csh_id" name="csh_id" value="@TempData["Usid"]" readonly>
                                     </div>
                                     <label for="uname" class="form-label">Tên xe:</label>
                                     <div class="mb-3">
-                                        <input type="text" class="form-control" id="tenxe" name="tenxe" value="@item.tenxe">
+                                        <input type="text" class="form-control" id="_tenxe" name="tenxe" value="@item.tenxe">
                                     </div>
                                     <label for="uname" class="form-label">Biển số:</label>
                                     <div class="mb-3">
-                                        <input type="text" class="form-control" id="bienso" name="bienso" value="@item.bienso">
+                                        <input type="text" class="form-control" id="_bienso" name="bienso" value="@item.bienso">
                                     </div>
                                     <label for="uname" class="form-label">Thương Hiệu:</label>
                                     <div class="mb-3">
-                                        <input type="text" class="form-control" id="thuonghieu" name="thuonghieu" value="@item.thuonghieu">
+                                        <input type="text" class="form-control" id="_thuonghieu" name="thuonghieu" value="@item.thuonghieu">
                                     </div>
                                     <label for="uname" class="form-label">Vị trí:</label>
                                     <div class="mb-3">
-                                        <input type="text" class="form-control" id="vitri" name="" value="@item.vitri">
+                                        <input type="text" class="form-control" id="_vitri" name="vitri" value="@item.vitri">
                                     </div>
                                     <label for="uname" class="form-label">Tình trạng:</label>
                                     <div class="mb-3">
-                                        <input type="text" class="form-control" id="tinhtrang" name="tinhtrang" value="@item.trangthai_id">
+                                        <input type="text" class="form-control" id="_trangthai_id" name="trangthai_id" value="@item.trangthai_id">
                                     </div>
                                     <label for="uname" class="form-label">Nhiên liệu:</label>
                                     <div class="mb-3">
-                                        <input type="text" class="form-control" id="nhienlieu" name="nhienlieu" value="@item.loainhienlieu">
+                                        <input type="text" class="form-control" id="_loainhienlieu" name="loainhienlieu" value="@item.loainhienlieu">
+                                    </div>
+                                    <label for="uname" class="form-label">Giá Thuê:</label>
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" id="_giathue" name="giathue" value="@item.giathue">
+                                    </div>
+                                    <label for="uname" class="form-label">Ngày đăng:</label>
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" id="_ngaythue" name="ngaythue" value="@item.ngaythue" readonly>
                                     </div>
                                 </div>
 
                                 <!-- Modal footer -->
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary">sửa</button>
+                                    <button type="submit" class="btn btn-primary">sửa</button>
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                                 </div>
 
