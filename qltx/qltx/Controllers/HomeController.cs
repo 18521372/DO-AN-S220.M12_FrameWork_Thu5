@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-
+using System.IO;
 
 namespace qltx.Controllers
 {
@@ -53,7 +53,8 @@ namespace qltx.Controllers
         public IActionResult Pagethongtinxe(int Page)
         {
             StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
-            List<xe> kh = context.Getxe();
+            string i = HttpContext.Session.GetString(SessionName);
+            List<xe> kh = context.Getxe(i);
             ViewData.Model = kh;
             TempData["Page"] = Page;
             //StoreContext context = new StoreContext("server=127.0.0.1;user id=root;password=;port=3307;database=quanlythuexe;");
@@ -62,7 +63,8 @@ namespace qltx.Controllers
         public IActionResult thongtinxe()
         {
             StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
-            List<xe> kh = context.Getxe();
+            string i = HttpContext.Session.GetString(SessionName);
+            List<xe> kh = context.Getxe(i);
             ViewData.Model = kh;
             TempData["Page"] = 6;
             //StoreContext context = new StoreContext("server=127.0.0.1;user id=root;password=;port=3307;database=quanlythuexe;");
@@ -126,7 +128,8 @@ namespace qltx.Controllers
             TempData["AlertMessage"] = "Không tìm thấy";
             TempData["AlertType"] = "alert-warning";
             context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
-            kh = context.Getxe();
+            string i = HttpContext.Session.GetString(SessionName);
+            kh = context.Getxe(i);
             ViewData.Model = kh;
             return View("quanlyxe");
         }
@@ -190,7 +193,8 @@ namespace qltx.Controllers
                 TempData["AlertType"] = "alert-success";
             }
             context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
-            List<xe> kh = context.Getxe();
+            string i = HttpContext.Session.GetString(SessionName);
+            List<xe> kh = context.Getxe(i);
             ViewData.Model = kh;
             return View("quanlyxe");
 
@@ -219,7 +223,8 @@ namespace qltx.Controllers
         public IActionResult quanlyxe()
         {
             StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
-            List<xe> kh = context.Getxe();
+            string i = HttpContext.Session.GetString(SessionName);
+            List<xe> kh = context.Getxe(i);
             ViewData.Model = kh;
             //StoreContext context = new StoreContext("server=127.0.0.1;user id=root;password=;port=3307;database=quanlythuexe;");
             return View();
@@ -266,6 +271,7 @@ namespace qltx.Controllers
             }
             return View("DangKy");
         }
+        
         public IActionResult ThemXe(xe xcnd)
         {
             int count;
@@ -289,7 +295,59 @@ namespace qltx.Controllers
             ViewBag.thuonghieuchodangky = th;
             ViewData.Model = kh;
             ViewBag.Name = HttpContext.Session.GetString(SessionName);
+            return View("Themanh");
+        }
+        public async Task<ActionResult> FileUpload(IFormFile file)
+        {
+
+            await UploadFile(file);
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            string i = HttpContext.Session.GetString(SessionName);
+            TempData["Usid"] = i;
+            List<thuonghieu> th = context.Gethangxe();
+            List<xe> kh = context.GetxeCuaNguoiDung(i);
+            ViewBag.thuonghieuchodangky = th;
+            ViewData.Model = kh;
+            ViewBag.Name = HttpContext.Session.GetString(SessionName);
+            TempData["AlertMessage"] = "đăng ký thành công";
+            TempData["AlertType"] = "alert-success";
             return View("Dangdethuexe");
+        }
+        // Upload file on server
+
+
+        public async Task<bool> UploadFile(IFormFile file)
+        {
+            string path = "";
+            bool iscopied = false;
+            try
+            {
+                if (file.Length > 0)
+                {
+                    int count = 0;
+                    string filename = Guid.NewGuid() + Path.GetExtension(file.FileName);
+                    StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+                    string i = HttpContext.Session.GetString(SessionName);
+                    count = context.InsertanhXe(i,filename);
+                    path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Upload"));
+                    TempData["1"] = filename;
+                    using (var filestream = new FileStream(Path.Combine(path, filename), FileMode.Create))
+                    {
+                        await file.CopyToAsync(filestream);
+                    }
+                    iscopied = true;
+                }
+                else
+                {
+                    iscopied = false;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return iscopied;
         }
         public IActionResult DangNhap()
         {
@@ -427,6 +485,92 @@ namespace qltx.Controllers
             ViewData.Model = kh;
             ViewBag.Name = HttpContext.Session.GetString(SessionName);
             return View("Dangdethuexe");
+        }
+        public IActionResult CapNhatUserAdmin(nguoidung nd)
+        {
+            int count;
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            count = context.UpdateUser(nd);
+
+            if (count > 0)
+            {
+                TempData["AlertMessage"] = "Cập nhật thành công";
+                TempData["AlertType"] = "alert-success";
+            }
+            else
+            {
+                TempData["AlertMessage"] = "Cập nhật không thành công";
+                TempData["AlertType"] = "alert-danger";
+            }
+            context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            List<nguoidung> kh = context.Getthanhvien();
+            ViewData.Model = kh;
+            return View("quanlythanhvien");
+        }
+        public IActionResult CapNhathangxe(thuonghieu th)
+        {
+            int count;
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            count = context.Updatethuonghieu(th);
+
+            if (count > 0)
+            {
+                TempData["AlertMessage"] = "Cập nhật thành công";
+                TempData["AlertType"] = "alert-success";
+            }
+            else
+            {
+                TempData["AlertMessage"] = "Cập nhật không thành công";
+                TempData["AlertType"] = "alert-danger";
+            }
+            context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            List<thuonghieu> kh = context.Gethangxe();
+            ViewData.Model = kh;
+            return View("quanlyhangxe");
+        }
+       
+        public IActionResult CapNhatxeadmin(xe xe)
+        {
+            int count;
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            count = context.UpdateXe(xe);
+
+            if (count > 0)
+            {
+                TempData["AlertMessage"] = "Cập nhật thành công";
+                TempData["AlertType"] = "alert-success";
+            }
+            else
+            {
+                TempData["AlertMessage"] = "Cập nhật không thành công";
+                TempData["AlertType"] = "alert-danger";
+            }
+            context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+
+            List<xe> kh = context.getxe();
+            ViewData.Model = kh;
+            return View("quanlyxe");
+        }
+        public IActionResult CapNhatthuexe(thuexe tx)
+        {
+            int count;
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            count = context.UpdateThuexe(tx);
+
+            if (count > 0)
+            {
+                TempData["AlertMessage"] = "Cập nhật thành công";
+                TempData["AlertType"] = "alert-success";
+            }
+            else
+            {
+                TempData["AlertMessage"] = "Cập nhật không thành công";
+                TempData["AlertType"] = "alert-danger";
+            }
+            context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            List<thuonghieu> kh = context.Gethangxe();
+            ViewData.Model = kh;
+            return View("quanlythanhvien");
         }
 
 

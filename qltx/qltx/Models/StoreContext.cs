@@ -97,7 +97,7 @@ namespace qltx.Models
             }
             return list;
         }
-        public List<xe> Getxe()
+        public List<xe> Getxe(string id)
         {
             List<xe> list = new List<xe>();
 
@@ -105,8 +105,10 @@ namespace qltx.Models
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                string str = "select * from xe ";
+                string str = "select * from xe where csh_id!=@id";
+
                 MySqlCommand cmd = new MySqlCommand(str, conn);
+                cmd.Parameters.AddWithValue("id", id);
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
@@ -123,7 +125,46 @@ namespace qltx.Models
                             ngaythue = Convert.ToDateTime(reader["ngaythue"]),
                             trangthai_id = reader["trangthai_id"].ToString(),
                             loainhienlieu = reader["loainhienlieu"].ToString(),
+                            tenanh = reader["img"].ToString(),
+                        });
+                    }
+                    reader.Close();
+                }
 
+                conn.Close();
+
+            }
+            return list;
+        }
+        public List<xe> getxe()
+        {
+            List<xe> list = new List<xe>();
+
+            //MySqlConnection conn = new MySqlConnection("server=127.0.0.1;user id=root;password=;port=3306;database=qlsv;");
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                string str = "select * from xe ";
+
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+            
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        list.Add(new xe()
+                        {
+                            id = reader["id"].ToString(),
+                            csh_id = reader["csh_id"].ToString(),
+                            tenxe = reader["tenxe"].ToString(),
+                            thuonghieu = reader["thuonghieu"].ToString(),
+                            vitri = reader["vitri"].ToString(),
+                            giathue = Convert.ToInt32(reader["giathue"]),
+                            bienso = reader["bienso"].ToString(),
+                            ngaythue = Convert.ToDateTime(reader["ngaythue"]),
+                            trangthai_id = reader["trangthai_id"].ToString(),
+                            loainhienlieu = reader["loainhienlieu"].ToString(),
+                            tenanh = reader["img"].ToString(),
                         });
                     }
                     reader.Close();
@@ -377,11 +418,10 @@ namespace qltx.Models
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                var str = "update xe set   tenxe=@tenxe, thuonghieu=@thuonghieu, vitri=@vitri, bienso=@bienso, giathue=@giathue, ngaythue=@ngaythue, trangthai_id=@trangthai_id, loainhienlieu=@loainhienlieu where id=@id";
+                var str = "update xe set   tenxe=@tenxe,  vitri=@vitri, bienso=@bienso, giathue=@giathue, ngaythue=@ngaythue, trangthai_id=@trangthai_id, loainhienlieu=@loainhienlieu where id=@id";
                 MySqlCommand cmd = new MySqlCommand(str, conn);
                 cmd.Parameters.AddWithValue("id", xcnd.id);
-                cmd.Parameters.AddWithValue("tenxe",xcnd.tenxe);
-                cmd.Parameters.AddWithValue("thuonghieu", xcnd.thuonghieu);
+                cmd.Parameters.AddWithValue("tenxe",xcnd.tenxe);             
                 cmd.Parameters.AddWithValue("vitri", xcnd.vitri);
                 cmd.Parameters.AddWithValue("bienso", xcnd.bienso);
                 cmd.Parameters.AddWithValue("giathue", xcnd.giathue);
@@ -396,7 +436,7 @@ namespace qltx.Models
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                var str = "insert into xe values(@id,@csh_id,@tenxe,@thuonghieu,@vitri,@bienso,@giathue,@ngaythue,@trangthai_id,@loainhienlieu)";
+                var str = "insert into xe values(@id,@csh_id,@tenxe,@thuonghieu,@vitri,@bienso,@giathue,@ngaythue,@trangthai_id,@loainhienlieu,'')";
                 MySqlCommand cmd = new MySqlCommand(str, conn);
                 string str2 = "select count(*) as soxe from xe ";
                 MySqlCommand cmd2 = new MySqlCommand(str2, conn);
@@ -405,7 +445,8 @@ namespace qltx.Models
                 {
                     if (reader.Read()) { id = Convert.ToInt32(reader["soxe"]); }
                 }
-                cmd.Parameters.AddWithValue("id", "XE"+id);
+                int v = id+1;
+                cmd.Parameters.AddWithValue("id", "XE00"+v);
                 cmd.Parameters.AddWithValue("csh_id", xcnd.csh_id);
                 cmd.Parameters.AddWithValue("tenxe", xcnd.tenxe);
                 cmd.Parameters.AddWithValue("thuonghieu", xcnd.thuonghieu);
@@ -418,7 +459,19 @@ namespace qltx.Models
                 return (cmd.ExecuteNonQuery());
             }
         }
-
+        internal int InsertanhXe(string id,string ten)
+        {
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                var str = "update xe set img=@ten where id =(SELECT id FROM xe where csh_id=@id ORDER BY id DESC LIMIT 1)";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                cmd.Parameters.AddWithValue("id", id);
+                cmd.Parameters.AddWithValue("ten",ten);
+                
+                return (cmd.ExecuteNonQuery());
+            }
+        }
         public int[] Xoahangxe(string makh)
         {
             using (MySqlConnection conn = GetConnection())
@@ -785,7 +838,36 @@ namespace qltx.Models
             }
             return list;
         }
-
+      
+        public int UpdateThuexe(thuexe nd)
+        {
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                var str = "update ctthuexe set sodienthoai=@sdt, batdau=@batdau, email=@email, ketthuc=@ketthuc, trangthai=@trangthai where id=@id";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                cmd.Parameters.AddWithValue("sdt", nd.sodienthoai);
+                cmd.Parameters.AddWithValue("batdau", nd.batdau);
+                cmd.Parameters.AddWithValue("email", nd.email);
+                cmd.Parameters.AddWithValue("ketthuc", nd.ketthuc);
+                cmd.Parameters.AddWithValue("trangthai", nd.trangthai);
+                cmd.Parameters.AddWithValue("id", nd.id);
+                return (cmd.ExecuteNonQuery());
+            }
+        }
+        public int Updatethuonghieu(thuonghieu th)
+        {
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                var str = "update thuonghieu set tenth=@tenth, quocgia=@quocgia where id=@id";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                cmd.Parameters.AddWithValue("tenth", th.tenth);
+                cmd.Parameters.AddWithValue("quocgia", th.quocgia);               
+                cmd.Parameters.AddWithValue("id", th.id);
+                return (cmd.ExecuteNonQuery());
+            }
+        }
 
     }
 }
