@@ -69,10 +69,6 @@ namespace qltx.Controllers
             return View("thongtinxe");
         }
 
-        public IActionResult thuexe()
-        {
-            return View();
-        }
         public IActionResult quanlythanhvien()
         {
             StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
@@ -321,11 +317,12 @@ namespace qltx.Controllers
         }
         public IActionResult HopDong()
         {
-            ViewBag.i = 1;
             StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            List<thuexe> kh = context.Getthuexe();
+            ViewData.Model = kh;
             string i = HttpContext.Session.GetString(SessionName);
             ViewBag.Name = HttpContext.Session.GetString(SessionName);
-            return View(context.ViewHopDong(i));
+            return View();
         }
         public IActionResult HopDong2()
         {
@@ -427,6 +424,43 @@ namespace qltx.Controllers
             ViewData.Model = kh;
             ViewBag.Name = HttpContext.Session.GetString(SessionName);
             return View("Dangdethuexe");
+        }
+        public IActionResult thuexe(string xeid)
+        {
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            string i = HttpContext.Session.GetString(SessionName);
+            TempData["Usid"] = i;
+            TempData["xeid"] = xeid;
+            List<xe> kh = context.Getxe();
+            foreach(var item in kh)
+            {
+                if(item.id==xeid)
+                {
+                    ViewBag.thongtinxe = item;
+                }    
+            }    
+            ViewData.Model = kh;
+            ViewBag.Name = HttpContext.Session.GetString(SessionName);
+            return View();
+
+        }
+        public IActionResult Themthuexe(thuexe hdcnd)
+        {
+            int count;
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            count = context.InsertThueXe(hdcnd);
+
+            if (count > 0)
+            {
+                TempData["AlertMessage"] = "đăng ký thành công";
+                TempData["AlertType"] = "alert-success";
+            }
+            else
+            {
+                TempData["AlertMessage"] = "đăng ký không thành công";
+                TempData["AlertType"] = "alert-danger";
+            }
+            return View("HopDong");
         }
 
 

@@ -405,7 +405,7 @@ namespace qltx.Models
                 {
                     if (reader.Read()) { id = Convert.ToInt32(reader["soxe"]); }
                 }
-                cmd.Parameters.AddWithValue("id", "XE"+id);
+                cmd.Parameters.AddWithValue("id", "XE"+id+1);
                 cmd.Parameters.AddWithValue("csh_id", xcnd.csh_id);
                 cmd.Parameters.AddWithValue("tenxe", xcnd.tenxe);
                 cmd.Parameters.AddWithValue("thuonghieu", xcnd.thuonghieu);
@@ -416,6 +416,40 @@ namespace qltx.Models
                 cmd.Parameters.AddWithValue("trangthai_id", xcnd.trangthai_id);
                 cmd.Parameters.AddWithValue("loainhienlieu", xcnd.loainhienlieu);
                 return (cmd.ExecuteNonQuery());
+            }
+        }
+        internal int InsertThueXe(thuexe hdcnd)
+        {
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                var str = "insert into thuexe values(@id,@nsd_id,@xe_id)";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                string str2 = "select count(*) as sothuexe from thuexe ";
+                MySqlCommand cmd2 = new MySqlCommand(str2, conn);
+                int id = 0;
+                using (var reader = cmd2.ExecuteReader())
+                {
+                    if (reader.Read()) { id = Convert.ToInt32(reader["sothuexe"]); }
+                }
+                cmd.Parameters.AddWithValue("id", "THUE" + id);
+                cmd.Parameters.AddWithValue("nsd_id", hdcnd.nsd_id);
+                cmd.Parameters.AddWithValue("xe_id", hdcnd.xe_id);
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    var str3 = "insert into ctthuexe values(@id,@sodienthoai,@email,@batdau,@ketthuc,@trangthai,@tongtien,@thanhtoan)";
+                    MySqlCommand cmd3 = new MySqlCommand(str3, conn);
+                    cmd3.Parameters.AddWithValue("id", "THUE" + id );
+                    cmd3.Parameters.AddWithValue("sodienthoai", hdcnd.sodienthoai);
+                    cmd3.Parameters.AddWithValue("email", hdcnd.email);
+                    cmd3.Parameters.AddWithValue("batdau", hdcnd.batdau);
+                    cmd3.Parameters.AddWithValue("ketthuc", hdcnd.ketthuc);
+                    cmd3.Parameters.AddWithValue("trangthai", hdcnd.trangthai);
+                    cmd3.Parameters.AddWithValue("tongtien", hdcnd.tongtien);
+                    cmd3.Parameters.AddWithValue("thanhtoan", hdcnd.thanhtoan);
+                    return (cmd3.ExecuteNonQuery());
+                }
+                else return 0;
             }
         }
 
@@ -447,6 +481,7 @@ namespace qltx.Models
                 return deleted;
             }
         }
+
         public int[] Xoaxe(string makh)
         {
             using (MySqlConnection conn = GetConnection())

@@ -27,14 +27,15 @@
             {
                 if (i <= (int)TempData["Page"] && i >= ((int)TempData["Page"] - 5))
                 {
-            <div class="w3-third w3-container w3-margin-bottom">
-
-                <img src="~/img/xe.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
-                <h4 class="card-title">@item.tenxe</h4>
-                <p class="card-text" style="color: white">Plate: @item.bienso</p>
-                <p class="card-text" style="color: white">Location: @item.vitri</p>
-                <p class="card-text" style="color: white">Cost: @item.giathue</p>
-                <p class="card-text" style="color: white">Date: @item.ngaythue</p>
+            <div class="w3-third w3-container w3-margin-bottom" >
+                <a href="thuexe?xeid=@item.id">
+                    <img src="~/img/xe.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity" >
+                    <h4 class="card-title">@item.tenxe</h4>
+                    <p class="card-text" style="color: white" >Plate: @item.bienso</p>
+                    <p class="card-text" style="color: white" >Location: @item.vitri</p>
+                    <p class="card-text" style="color: white" >Cost: @item.giathue</p>
+                    <p class="card-text" style="color: white" >Date: @item.ngaythue</p>
+                </a>
 
 
             </div>
