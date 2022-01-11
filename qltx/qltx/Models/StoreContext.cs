@@ -68,7 +68,7 @@ namespace qltx.Models
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                string str = "select * from thuexe tx, ctthuexe ct where tx.id=ct.id ";
+                string str = "select * from thuexe tx,xe, ctthuexe ct where tx.id=ct.id and xe.id=tx.xe_id";
                 MySqlCommand cmd = new MySqlCommand(str, conn);
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -86,7 +86,7 @@ namespace qltx.Models
                             ketthuc = Convert.ToDateTime(reader["ketthuc"]),
                             thanhtoan = reader["thanhtoan"].ToString(),
                             sodienthoai = reader["sodienthoai"].ToString(),
-                            tenanh= reader["tenanh"].ToString(),
+                            tenxe = reader["tenxe"].ToString(),
                         });
                     }
                     reader.Close();
@@ -881,13 +881,14 @@ namespace qltx.Models
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                var str = "update ctthuexe set sodienthoai=@sdt, batdau=@batdau, email=@email, ketthuc=@ketthuc, trangthai=@trangthai where id=@id";
+                var str = "update ctthuexe set sodienthoai=@sdt, batdau=@batdau, email=@email, ketthuc=@ketthuc, trangthai=@trangthai,thanhtoan=@thanhtoan where id=@id";
                 MySqlCommand cmd = new MySqlCommand(str, conn);
                 cmd.Parameters.AddWithValue("sdt", nd.sodienthoai);
                 cmd.Parameters.AddWithValue("batdau", nd.batdau);
                 cmd.Parameters.AddWithValue("email", nd.email);
                 cmd.Parameters.AddWithValue("ketthuc", nd.ketthuc);
                 cmd.Parameters.AddWithValue("trangthai", nd.trangthai);
+                cmd.Parameters.AddWithValue("thanhtoan", nd.thanhtoan);
                 cmd.Parameters.AddWithValue("id", nd.id);
                 return (cmd.ExecuteNonQuery());
             }

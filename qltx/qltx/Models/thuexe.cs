@@ -18,7 +18,13 @@ namespace qltx.Models
         private string _thanhtoan;
         private string _sodienthoai;
         private string _tenanh;
-      
+        private string _tenxe;
+
+        public string tenxe
+        {
+            get { return _tenxe; }
+            set { _tenxe = value; }
+        }
         public string tenanh
         {
             get { return _tenanh; }

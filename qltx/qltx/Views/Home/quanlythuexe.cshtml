@@ -73,9 +73,35 @@
                                             <td>@item.email</td>
                                             <td>@item.batdau</td>
                                             <td>@item.ketthuc</td>
-                                            <td>@item.trangthai</td>
-                                            <td>@item.tongtien</td>
-                                            <td>@item.thanhtoan</td>
+                                            @if (item.trangthai == "cl")
+                                            {
+                                                <td>Chờ lấy</td>
+                                            }
+                                            else
+                                            {
+                                                @if (item.trangthai == "kt")
+                                                {
+                                                    <td>Kết thúc</td>
+
+                                                }
+                                                else
+                                                {
+                                                    <td>Đang thuê</td>
+                                                }
+
+                                            }
+                                            @if (item.thanhtoan == "chua thanh toan")
+                                            {
+                                                <td>Chưa thanh toán</td>
+                                            }
+                                            else
+                                            {
+                                                <td>Đã thanh toán</td>
+
+
+                                            }
+
+
                                             <td><button type="button" class="btn btn-primary" name="sua" data-bs-toggle="modal" data-bs-target="@("#"+item.id)">Sửa</button></td>
                                         </tr>
                                         i++;
@@ -96,9 +122,6 @@
     <div class="modal fade" id="@item.id">
         <div class="modal-dialog">
             <div class="modal-content">
-
-
-                <!-- Modal Header -->
                 <div class="modal-header">
                     <h4 class="modal-title" style="color:#000000;">Sửa thông tin thuê xe</h4>
                 </div>
@@ -123,29 +146,55 @@
                         <input type="text" class="form-control" id="phone" value="@item.batdau" name="batdau">
                     </div>
                     <div class="mb-3">
-                        <input type="text" class="form-control" id="phone" value=">@item.ketthuc" name="ketthuc">
+                        <input type="text" class="form-control" id="phone" value="@item.ketthuc" name="ketthuc">
                     </div>
                     <div class="mb-3">
-                        <input type="text" class="form-control" id="phone" value="@item.trangthai" name="trangthai">
+                        <select class="form-control" id="trangthai" name="trangthai">
+                            @if (item.trangthai == "cl")
+                            {
+                                <option value="cl" selected>Chờ lấy</option>
+                                <option value="kt">Kết thúc</option>
+                                <option value="dt">Đang thuê</option>
+                            }
+                            else
+                            {
+                                @if (item.trangthai == "kt")
+                                {
+                                    <option value="cl">Chờ lấy</option>
+                                    <option value="kt" selected>Kết thúc</option>
+                                    <option value="dt">Đang thuê</option>
+                                }
+                                else
+                                {
+                                    <option value="cl">Chờ lấy</option>
+                                    <option value="kt">Kết thúc</option>
+                                    <option value="dt" selected>Đang thuê</option>
+                                }
+                            }
+                        </select>
                     </div>
                     <div class="mb-3">
                         <input type="text" class="form-control" id="phone" value="@item.tongtien" name="tongtien">
                     </div>
                     <div class="mb-3">
-                        <input type="text" class="form-control" id="phone" value="@item.thanhtoan" name="thanhtoan" readonly>
+                        <select class="form-control" id="thanhtoan" name="thanhtoan">
+                            @if (item.thanhtoan == "chua thanh toan")
+                            {
+                                <option value="chua thanh toan" selected>Chưa thanh toán</option>
+                                <option value="da thanh toan">Đã thanh toán</option>
+                            }
+                            else
+                            {
+                                <option value="chua thanh toan">Chưa thanh toán</option>
+                                <option value="da thanh toan" selected>Đã thanh toán</option>
+                            }
+                        </select>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Lưu</button>
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                     </div>
-
                 </form>
-
-                <!-- Modal footer -->
-
-
-
-
             </div>
         </div>
     </div>

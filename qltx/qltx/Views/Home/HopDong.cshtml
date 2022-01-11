@@ -39,9 +39,7 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>id </th>
-                                        <th>Mã xe</th>
-                                        <th>Mã người thuê</th>
+                                        <th>Tên xe</th>
                                         <th>Số điện thoại</th>
                                         <th>Email</th>
                                         <th>Ngày bắt đầu</th>
@@ -56,19 +54,41 @@
                                     {
                                         if (item.nsd_id == ViewBag.Name)
                                         {
-                                            <tr>
-                                                <td>@i</td>
-                                                <td>@item.id</td>
-                                                <td>@item.xe_id</td>
-                                                <td>@item.nsd_id</td>
-                                                <td>@item.sodienthoai</td>
-                                                <td>@item.email</td>
-                                                <td>@item.batdau</td>
-                                                <td>@item.ketthuc</td>
-                                                <td>@item.trangthai</td>
-                                                <td>@item.tongtien</td>
-                                                <td>@item.thanhtoan</td>
-                                            </tr>
+                                    <tr>
+                                        <td>@i</td>                                        
+                                        <td>@item.tenxe</td>
+                                        <td>@item.sodienthoai</td>
+                                        <td>@item.email</td>
+                                        <td>@item.batdau</td>
+                                        <td>@item.ketthuc</td>
+                                        @if (item.trangthai == "cl")
+                                        {
+                                            <td>Chờ lấy</td>
+                                        }
+                                        else
+                                        {
+                                            @if (item.trangthai == "kt")
+                                            {
+                                                <td>Kết thúc</td>
+
+                                            }
+                                            else
+                                            {
+                                                <td>Đang thuê</td>
+                                            }
+                                        }
+                                        <td>@item.tongtien</td>
+                                        @if (item.thanhtoan == "chua thanh toan")
+                                        {
+                                            <td>Chưa thanh toán</td>
+                                        }
+                                        else
+                                        {
+                                            <td>Đã thanh toán</td>
+
+
+                                        }                                      
+                                    </tr>
                                             i++;
                                         }
                                     }

@@ -23,7 +23,7 @@
     <body>
         <div class="container-fluid mt-3">
             <div class="row">
-                <div class="col-sm-8 p-3 "><img src="@("~/Upload/"+ViewBag.thongtinxe.tenanh)" asp-append-version="true" class="img-thumbnail" alt="Cinque Terre" > </div>
+                <div class="col-sm-8 p-3 "><img src="@("~/Upload/"+ViewBag.thongtinxe.tenanh)" asp-append-version="true" style="width: 100%;" alt="Cinque Terre" > </div>
                 <div class="col-sm-4 p-3 ">
                     <div class="w3-container w3-margin-bottom">
                         <h4>Plate: @ViewBag.thongtinxe.bienso</h4>
@@ -53,7 +53,7 @@
                         <!-- Modal body -->
                         <div class="modal-body">
                             <div class="mb-3">
-                                <input type="text" class="form-control" id="id" name="id" hidden value="loiid">
+                                <input type="text" class="form-control" id="gia" name="id" hidden value= @ViewBag.thongtinxe.giathue>
                             </div>
                             <div class="mb-3">
                                 <input type="text" class="form-control" id="nsd_id" name="nsd_id"hidden value="@TempData["Usid"]">
@@ -78,7 +78,7 @@
                             </div>
                             <label for="uname" class="form-label">Ngày kết thúc:</label>
                             <div class="mb-3">
-                                <input type="date" class="form-control" id="ketthuc" name="ketthuc">
+                                <input type="date" class="form-control" id="ketthuc" name="ketthuc" onchange="tinhtien()">
                             </div>
                             <label for="uname" class="form-label">Số điện thoại:</label>
                             <div class="mb-3">
@@ -86,7 +86,7 @@
                             </div>
                             <label for="uname" class="form-label">Tổng tiền</label>
                             <div class="mb-3">
-                                <input type="number" class="form-control" id="tongtien" name="tongtien">
+                                <input type="text" class="form-control" id="tongtien" name="tongtien">
                             </div>
 
                         </div>
