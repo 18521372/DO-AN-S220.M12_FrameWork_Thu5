@@ -474,14 +474,14 @@ namespace qltx.Models
                 {
                     if (reader.Read()) { id = Convert.ToInt32(reader["sothuexe"]); }
                 }
-                cmd.Parameters.AddWithValue("id", "THUE" + id);
+                cmd.Parameters.AddWithValue("id", "THUE" + (id+1));
                 cmd.Parameters.AddWithValue("nsd_id", hdcnd.nsd_id);
                 cmd.Parameters.AddWithValue("xe_id", hdcnd.xe_id);
                 if (cmd.ExecuteNonQuery() > 0)
                 {
                     var str3 = "insert into ctthuexe values(@id,@sodienthoai,@email,@batdau,@ketthuc,@trangthai,@tongtien,@thanhtoan)";
                     MySqlCommand cmd3 = new MySqlCommand(str3, conn);
-                    cmd3.Parameters.AddWithValue("id", "THUE" + id);
+                    cmd3.Parameters.AddWithValue("id", "THUE" + (id+1));
                     cmd3.Parameters.AddWithValue("sodienthoai", hdcnd.sodienthoai);
                     cmd3.Parameters.AddWithValue("email", hdcnd.email);
                     cmd3.Parameters.AddWithValue("batdau", hdcnd.batdau);

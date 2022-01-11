@@ -3,7 +3,7 @@
 *@
 @{
     Layout = "~/Views/Shared/_Layout1.cshtml";
-    @if (TempData["AlertMessage"] != null)
+    @if(TempData["AlertMessage"] != null)
     {
         <div id="AlertBox" class="alert @TempData["AlertType"] hide" role="alert" style="text-align:center;">
             @TempData["AlertMessage"]
@@ -60,20 +60,20 @@
                                         <td>@item.thuonghieu</td>
                                         <td>@item.vitri</td>
                                         <td>@item.giathue</td>
-                                        @if (item.trangthai_id == "cd")
+                                        @if(item.trangthai_id == "cd")
                                         {
                                             <td>Chờ duyệt</td>
                                         }
                                         else
                                         {
-                                            @if (item.trangthai_id == "dt")
+                                            @if(item.trangthai_id == "dt")
                                             {
                                                 <td>Đang thuê</td>
 
                                             }
                                             else
                                             {
-                                                @if (item.trangthai_id == "ss")
+                                                @if(item.trangthai_id == "ss")
                                                 {
                                                     <td>Sẵn sàng</td>
 
