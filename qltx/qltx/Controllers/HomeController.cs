@@ -483,7 +483,6 @@ namespace qltx.Controllers
             ViewBag.Name = HttpContext.Session.GetString(SessionName);
             return View("Dangdethuexe");
         }
-<<<<<<< HEAD
         public IActionResult thuexe(string xeid)
         {
             StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
@@ -512,8 +511,16 @@ namespace qltx.Controllers
             if (count > 0)
             {
                 TempData["AlertMessage"] = "đăng ký thành công";
-=======
-        public IActionResult CapNhatUserAdmin(nguoidung nd)
+                TempData["AlertType"] = "alert-success";
+            }
+            else
+            {
+                TempData["AlertMessage"] = "đăng ký không thành công";
+                TempData["AlertType"] = "alert-danger";
+            }
+            return View("HopDong");
+        }
+            public IActionResult CapNhatUserAdmin(nguoidung nd)
         {
             int count;
             StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
@@ -565,17 +572,10 @@ namespace qltx.Controllers
             if (count > 0)
             {
                 TempData["AlertMessage"] = "Cập nhật thành công";
->>>>>>> ad673145196d873b37f47f1432d078f126f44932
                 TempData["AlertType"] = "alert-success";
             }
             else
             {
-<<<<<<< HEAD
-                TempData["AlertMessage"] = "đăng ký không thành công";
-                TempData["AlertType"] = "alert-danger";
-            }
-            return View("HopDong");
-=======
                 TempData["AlertMessage"] = "Cập nhật không thành công";
                 TempData["AlertType"] = "alert-danger";
             }
@@ -605,7 +605,6 @@ namespace qltx.Controllers
             List<thuonghieu> kh = context.Gethangxe();
             ViewData.Model = kh;
             return View("quanlythanhvien");
->>>>>>> ad673145196d873b37f47f1432d078f126f44932
         }
 
 

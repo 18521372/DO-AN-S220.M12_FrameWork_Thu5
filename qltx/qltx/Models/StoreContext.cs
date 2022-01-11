@@ -445,12 +445,8 @@ namespace qltx.Models
                 {
                     if (reader.Read()) { id = Convert.ToInt32(reader["soxe"]); }
                 }
-<<<<<<< HEAD
-                cmd.Parameters.AddWithValue("id", "XE"+id+1);
-=======
                 int v = id+1;
                 cmd.Parameters.AddWithValue("id", "XE00"+v);
->>>>>>> ad673145196d873b37f47f1432d078f126f44932
                 cmd.Parameters.AddWithValue("csh_id", xcnd.csh_id);
                 cmd.Parameters.AddWithValue("tenxe", xcnd.tenxe);
                 cmd.Parameters.AddWithValue("thuonghieu", xcnd.thuonghieu);
@@ -463,16 +459,12 @@ namespace qltx.Models
                 return (cmd.ExecuteNonQuery());
             }
         }
-<<<<<<< HEAD
         internal int InsertThueXe(thuexe hdcnd)
-=======
-        internal int InsertanhXe(string id,string ten)
->>>>>>> ad673145196d873b37f47f1432d078f126f44932
         {
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-<<<<<<< HEAD
+
                 var str = "insert into thuexe values(@id,@nsd_id,@xe_id)";
                 MySqlCommand cmd = new MySqlCommand(str, conn);
                 string str2 = "select count(*) as sothuexe from thuexe ";
@@ -489,7 +481,7 @@ namespace qltx.Models
                 {
                     var str3 = "insert into ctthuexe values(@id,@sodienthoai,@email,@batdau,@ketthuc,@trangthai,@tongtien,@thanhtoan)";
                     MySqlCommand cmd3 = new MySqlCommand(str3, conn);
-                    cmd3.Parameters.AddWithValue("id", "THUE" + id );
+                    cmd3.Parameters.AddWithValue("id", "THUE" + id);
                     cmd3.Parameters.AddWithValue("sodienthoai", hdcnd.sodienthoai);
                     cmd3.Parameters.AddWithValue("email", hdcnd.email);
                     cmd3.Parameters.AddWithValue("batdau", hdcnd.batdau);
@@ -503,7 +495,11 @@ namespace qltx.Models
             }
         }
 
-=======
+        internal int InsertanhXe(string id, string ten)
+        {
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
                 var str = "update xe set img=@ten where id =(SELECT id FROM xe where csh_id=@id ORDER BY id DESC LIMIT 1)";
                 MySqlCommand cmd = new MySqlCommand(str, conn);
                 cmd.Parameters.AddWithValue("id", id);
@@ -512,7 +508,6 @@ namespace qltx.Models
                 return (cmd.ExecuteNonQuery());
             }
         }
->>>>>>> ad673145196d873b37f47f1432d078f126f44932
         public int[] Xoahangxe(string makh)
         {
             using (MySqlConnection conn = GetConnection())
