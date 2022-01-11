@@ -17,6 +17,13 @@ namespace qltx.Models
         private DateTime _ketthuc;
         private string _thanhtoan;
         private string _sodienthoai;
+        private string _tenanh;
+      
+        public string tenanh
+        {
+            get { return _tenanh; }
+            set { _tenanh = value; }
+        }
         public string id
         {
             get { return _id; }
