@@ -489,7 +489,7 @@ namespace qltx.Controllers
             string i = HttpContext.Session.GetString(SessionName);
             TempData["Usid"] = i;
             TempData["xeid"] = xeid;
-            List<xe> kh = context.Getxe();
+            List<xe> kh = context.Getxe(i);
             foreach(var item in kh)
             {
                 if(item.id==xeid)
