@@ -86,7 +86,7 @@ namespace qltx.Models
                             ketthuc = Convert.ToDateTime(reader["ketthuc"]),
                             thanhtoan = reader["thanhtoan"].ToString(),
                             sodienthoai = reader["sodienthoai"].ToString(),
-
+                            tenanh= reader["tenanh"].ToString(),
                         });
                     }
                     reader.Close();
