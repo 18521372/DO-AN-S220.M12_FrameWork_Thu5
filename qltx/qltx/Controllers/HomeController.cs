@@ -518,6 +518,10 @@ namespace qltx.Controllers
                 TempData["AlertMessage"] = "đăng ký không thành công";
                 TempData["AlertType"] = "alert-danger";
             }
+            List<thuexe> kh = context.Getthuexe();
+            ViewData.Model = kh;
+            string i = HttpContext.Session.GetString(SessionName);
+            ViewBag.Name = HttpContext.Session.GetString(SessionName);
             return View("HopDong");
         }
             public IActionResult CapNhatUserAdmin(nguoidung nd)
