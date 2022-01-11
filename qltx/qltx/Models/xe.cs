@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using System.IO;
+using Microsoft.AspNetCore.Http;
 namespace qltx.Models
 {
     public class xe
@@ -17,10 +18,23 @@ namespace qltx.Models
         private string _trangthai_id;
         private string _loainhienlieu;     
         private int _giathue;
-        public string csh_id
+        private IFormFile _ImageFile;
+        private string _tenanh;
+        public IFormFile ImageFile
+        {
+            get { return _ImageFile; }
+            set { _ImageFile = value; }
+        }
+            
+public string csh_id
         {
             get { return _csh_id; }
             set { _csh_id = value; }
+        }
+        public string tenanh
+        {
+            get { return _tenanh; }
+            set { _tenanh = value; }
         }
         public int giathue
         {

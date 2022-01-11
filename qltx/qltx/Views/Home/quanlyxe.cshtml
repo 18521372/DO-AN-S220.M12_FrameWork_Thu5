@@ -40,10 +40,10 @@
                 </div>
             </form>
             <form>
-                           
+
                 <div class="row">
                     <div class="col table-wrapper-scroll-y my-custom-scrollbar" style="height: 50px ;overflow-y: scroll;overflow-x:hidden; min-height: 450px; ">
-                       
+
 
                         <table class="table">
                             <thead>
@@ -57,7 +57,7 @@
                                     <th>Vị trí</th>
                                     <th>Giá cho thuê</th>
                                     <th>Trạng thái</th>
-                                    <th>Ngày đăng</th>
+                                    <th>Ngày đăng xe</th>
                                     <th>Loại nhiên liệu</th>
                                     <th></th>
                                     <th></th>
@@ -78,8 +78,9 @@
                                         <td>@item.trangthai_id</td>
                                         <td>@item.ngaythue</td>
                                         <td>@item.loainhienlieu</td>
-                                        <td><a href="Suaxe?Id=@item.id" class="btn btn-primary">Sửa</a></td>
+                                        <td><button type="button" class="btn btn-primary" name="sua" data-bs-toggle="modal" data-bs-target="@("#"+item.id)">Sửa</button></td>
                                         <td><a href="Xoaxe?Id=@item.id" class="btn btn-primary">Xóa</a></td>
+
                                     </tr>
                                     i++;
                                 }
@@ -87,8 +88,104 @@
                         </table>
                     </div>
                 </div>
+
             </form>
+
         </div>
+
     </body>
 </html>
+}
+@foreach (var item in Model)
+{
+
+    <div class="modal fade" id="@item.id">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title" style="color:#000000;">Sửa thông tin xe</h4>
+                </div>
+
+                <form action="CapNhatxeadmin" method="post">
+                    <div class="mb-3 mt-3">
+                        <input type="text" class="form-control" id="id" value="@item.id" name="id" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="name" value="@item.tenxe" name="tenxe">
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="address" value="@item.bienso" name="bienso">
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="email" value="@item.thuonghieu" name="email">
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="phone" value="@item.csh_id" name="csh_id">
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="phone" value="@item.vitri" name="vitri">
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="phone" value="@item.giathue" name="giathue">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <select class="form-control" id="trangthai_id" name="trangthai_id">
+                            @if(item.trangthai_id=="ss")
+                            {
+                            <option value="ss" selected>Sẵn sàng</option>
+                            <option value="cd">Chờ duyệt</option>
+                            <option value="dt">Đang thuê</option>
+                            <option value="td">Tạm dừng</option>
+                                }else{
+                            @if (item.trangthai_id=="cd")
+                            {
+                            <option value="ss">Sẵn sàng</option>
+                            <option value="cd" selected>Chờ duyệt</option>
+                            <option value="dt">Đang thuê</option>
+                            <option value="td">Tạm dừng</option>
+                            }else{
+                            @if(item.trangthai_id=="dt")
+                            {
+                            <option value="ss">Sẵn sàng</option>
+                            <option value="cd">Chờ duyệt</option>
+                            <option value="dt" selected>Đang thuê</option>
+                            <option value="td">Tạm dừng</option>
+                            }
+                            else
+                            {
+                            <option value="ss">Sẵn sàng</option>
+                            <option value="cd">Chờ duyệt</option>
+                            <option value="dt">Đang thuê</option>
+                            <option value="td" selected>Tạm dừng</option>
+                            }
+                            }
+
+                            }
+
+                        </select>                     
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="phone" value="@item.loainhienlieu" name="loainhienlieu">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Lưu</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    </div>
+
+                </form>
+
+                <!-- Modal footer -->
+
+
+
+
+            </div>
+        </div>
+    </div>
+    i++;
+
 }
