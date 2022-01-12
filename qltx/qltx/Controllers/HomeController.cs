@@ -155,7 +155,7 @@ namespace qltx.Controllers
             TempData["AlertType"] = "alert-warning";
             context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
             string i = HttpContext.Session.GetString(SessionName);
-            kh = context.Getxe(i);
+            kh = context.getxeadmin();
             ViewData.Model = kh;
             return View("quanlyxe");
         }
@@ -220,7 +220,7 @@ namespace qltx.Controllers
             }
             context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
             string i = HttpContext.Session.GetString(SessionName);
-            List<xe> kh = context.Getxe(i);
+            List<xe> kh = context.getxeadmin();
             ViewData.Model = kh;
             return View("quanlyxe");
 
@@ -250,7 +250,7 @@ namespace qltx.Controllers
         {
             StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
             string i = HttpContext.Session.GetString(SessionName);
-            List<xe> kh = context.Getxe(i);
+            List<xe> kh = context.getxeadmin();
             ViewData.Model = kh;
             //StoreContext context = new StoreContext("server=127.0.0.1;user id=root;password=;port=3307;database=quanlythuexe;");
             return View();
@@ -615,7 +615,7 @@ namespace qltx.Controllers
             }
             context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
 
-            List<xe> kh = context.getxe();
+            List<xe> kh = context.getxeadmin();
             ViewData.Model = kh;
             return View("quanlyxe");
         }

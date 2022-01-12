@@ -105,7 +105,7 @@ namespace qltx.Models
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                string str = "select * from xe where csh_id!=@id";
+                string str = "select * from xe where csh_id!=@id and trangthai_id='ss'";
 
                 MySqlCommand cmd = new MySqlCommand(str, conn);
                 cmd.Parameters.AddWithValue("id", id);
@@ -136,7 +136,7 @@ namespace qltx.Models
             }
             return list;
         }
-        public List<xe> getxe()
+        public List<xe> getxeadmin()
         {
             List<xe> list = new List<xe>();
 
@@ -478,6 +478,10 @@ namespace qltx.Models
                 cmd.Parameters.AddWithValue("id", "THUE" + (id+1));
                 cmd.Parameters.AddWithValue("nsd_id", hdcnd.nsd_id);
                 cmd.Parameters.AddWithValue("xe_id", hdcnd.xe_id);
+                str = "update xe set trangthai_id='dt' where id=@id";
+                MySqlCommand cmd4 = new MySqlCommand(str, conn);
+                 cmd4.Parameters.AddWithValue("id", hdcnd.xe_id);
+                cmd4.ExecuteNonQuery();
                 if (cmd.ExecuteNonQuery() > 0)
                 {
                     var str3 = "insert into ctthuexe values(@id,@sodienthoai,@email,@batdau,@ketthuc,@trangthai,@tongtien,@thanhtoan)";
@@ -902,6 +906,13 @@ namespace qltx.Models
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
+                if (nd.trangthai == "kt")
+                {
+                    var str1 = "update xe set trangthai_id='ss'";
+                    MySqlCommand cmd1 = new MySqlCommand(str1, conn);
+                    cmd1.ExecuteNonQuery();
+
+                }
                 var str = "update ctthuexe set sodienthoai=@sdt, batdau=@batdau, email=@email, ketthuc=@ketthuc, trangthai=@trangthai,thanhtoan=@thanhtoan where id=@id";
                 MySqlCommand cmd = new MySqlCommand(str, conn);
                 cmd.Parameters.AddWithValue("sdt", nd.sodienthoai);
