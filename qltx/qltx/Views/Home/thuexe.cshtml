@@ -74,7 +74,7 @@
                             </div>
                             <label for="uname" class="form-label">Ngày bắt đầu:</label>
                             <div class="mb-3">
-                                <input type="date" class="form-control" id="batdau" name="batdau">
+                                <input type="date" class="form-control" id="batdau" name="batdau" onchange="tinhtien()" >
                             </div>
                             <label for="uname" class="form-label">Ngày kết thúc:</label>
                             <div class="mb-3">
@@ -86,7 +86,7 @@
                             </div>
                             <label for="uname" class="form-label">Tổng tiền</label>
                             <div class="mb-3">
-                                <input type="text" class="form-control" id="tongtien" name="tongtien">
+                                <input type="text" class="form-control" id="tongtien" name="tongtien" readonly>
                             </div>
 
                         </div>
@@ -106,3 +106,14 @@
     </body>
 </html>
 }
+<script>
+    function tinhtien() {
+        
+        $gia = $('#gia').val();      
+        var date1 = new Date($('#batdau').val());
+        var date2 = new Date($('#ketthuc').val());
+        var ms1 = date1.getTime();
+        var ms2 = date2.getTime();
+        $('#tongtien').val(Math.ceil(((ms2 - ms1) / (24 * 60 * 60 * 1000))+1)*$gia);
+    }
+</script>
