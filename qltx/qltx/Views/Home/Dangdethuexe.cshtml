@@ -36,7 +36,7 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>id</th>
+                                        <th></th>
                                         <th>Tên xe</th>
                                         <th>Biển sô</th>
                                         <th>Thương hiệu</th>
@@ -54,10 +54,10 @@
                                     {
                                     <tr>
                                         <td>@i</td>
-                                        <td>@item.id</td>
+                                        <td> <img src="@("~/Upload/"+item.tenanh)" asp-append-version="true" alt="Norway" width="150px" height="100px" class="w3-hover-opacity"></td>
                                         <td>@item.tenxe</td>
                                         <td>@item.bienso</td>
-                                        <td>@item.thuonghieu</td>
+                                        <td>@item.tenth</td>
                                         <td>@item.vitri</td>
                                         <td>@item.giathue</td>
                                         @if(item.trangthai_id == "cd")
@@ -135,7 +135,7 @@
                                     </div>
                                     <label for="uname" class="form-label">Thương Hiệu:</label>
                                     <div class="mb-3">
-                                        <input type="text" class="form-control" id="_thuonghieu" name="thuonghieu" value="@item.thuonghieu">
+                                        <input type="text" class="form-control" id="_thuonghieu" name="thuonghieu" readonly value="@item.tenth">
                                     </div>
                                     <label for="uname" class="form-label">Vị trí:</label>
                                     <div class="mb-3">

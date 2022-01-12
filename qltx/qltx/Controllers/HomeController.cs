@@ -79,6 +79,36 @@ namespace qltx.Controllers
             return View();
 
         }
+        public IActionResult capnhatmatkhau()
+        {
+          
+            return View();
+            
+
+        }
+        public IActionResult CapNhatmk(string mkcu,string mkmoi)
+        {
+
+        
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;
+            string i = HttpContext.Session.GetString(SessionName);
+            int count = context.cnmk(i,mkcu,mkmoi);
+            if (count > 0)
+            {
+                TempData["AlertMessage"] = "Cập nhật thành công";
+                TempData["AlertType"] = "alert-success";
+            }
+            else
+            {
+                TempData["AlertMessage"] = "Cập nhật không thành công!!! Sai mật khẩu cũ";
+                TempData["AlertType"] = "alert-danger";
+            }
+            
+            ViewBag.Name = HttpContext.Session.GetString(SessionName);
+            return View("capnhatmatkhau");
+
+
+        }
         public IActionResult Timthanhvien(string id_tim)
         {
             StoreContext context = HttpContext.RequestServices.GetService(typeof(qltx.Models.StoreContext)) as StoreContext;

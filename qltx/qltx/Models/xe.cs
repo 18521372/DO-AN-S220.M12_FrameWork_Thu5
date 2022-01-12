@@ -20,6 +20,7 @@ namespace qltx.Models
         private int _giathue;
         private IFormFile _ImageFile;
         private string _tenanh;
+        private string _tenth;
         public IFormFile ImageFile
         {
             get { return _ImageFile; }
@@ -50,6 +51,11 @@ public string csh_id
         {
             get { return _tenxe; }
             set { _tenxe = value; }
+        }
+        public string tenth
+        {
+            get { return _tenth; }
+            set { _tenth = value; }
         }
         public string thuonghieu
         {

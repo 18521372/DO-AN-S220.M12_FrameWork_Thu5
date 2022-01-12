@@ -183,7 +183,7 @@ namespace qltx.Models
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                string str = "select * from xe where csh_id=@id";
+                string str = "select * from xe,thuonghieu th where csh_id=@id and xe.thuonghieu=th.id";
                 
                 MySqlCommand cmd = new MySqlCommand(str, conn);
                 cmd.Parameters.AddWithValue("id", i);
@@ -203,7 +203,8 @@ namespace qltx.Models
                             ngaythue = Convert.ToDateTime(reader["ngaythue"]),
                             trangthai_id = reader["trangthai_id"].ToString(),
                             loainhienlieu = reader["loainhienlieu"].ToString(),
-
+                            tenanh = reader["img"].ToString(),
+                            tenth = reader["tenth"].ToString(),
                         });
                     }
                     reader.Close();
@@ -222,7 +223,7 @@ namespace qltx.Models
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                string str = "select * from xe where  id =@id";
+                string str = "select * from xe,thuonghieu where  id =@id and xe.thuonghieu=thuonghieu.id" ;
                 MySqlCommand cmd = new MySqlCommand(str, conn);
                 cmd.Parameters.AddWithValue("id", id);
                 using (var reader = cmd.ExecuteReader())
@@ -241,7 +242,7 @@ namespace qltx.Models
                             ngaythue = Convert.ToDateTime(reader["ngaythue"]),
                             trangthai_id = reader["trangthai_id"].ToString(),
                             loainhienlieu = reader["loainhienlieu"].ToString(),
-
+                            tenth = reader["tenth"].ToString(),
                         });
                     }
                     reader.Close();
@@ -779,9 +780,16 @@ namespace qltx.Models
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
+                var str1 = "select count(*) as sothuexe from nguoidung";
+                MySqlCommand cmd2 = new MySqlCommand(str1, conn);
+                int id = 0;
+                using (var reader = cmd2.ExecuteReader())
+                {
+                    if (reader.Read()) { id = Convert.ToInt32(reader["sothuexe"]); }
+                }
                 var str = "insert into nguoidung values(@id, @ten, @email, @diachi, @gioitinh, @ngaysinh, @idcard, @password, @sdt, @quyen)";
                 MySqlCommand cmd = new MySqlCommand(str, conn);
-                cmd.Parameters.AddWithValue("id", nd.id);
+                cmd.Parameters.AddWithValue("id", "US00"+(id+1));
                 cmd.Parameters.AddWithValue("ten", nd.ten);
                 cmd.Parameters.AddWithValue("email", nd.email);
                 cmd.Parameters.AddWithValue("diachi", nd.diachi);
@@ -802,7 +810,7 @@ namespace qltx.Models
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                var str = "select ten, diachi, email, sodienthoai, gioitinh, id from nguoidung where id=@id";
+                var str = "select ten, diachi, email, sodienthoai, gioitinh, id,password from nguoidung where id=@id";
                 MySqlCommand cmd = new MySqlCommand(str, conn);
                 cmd.Parameters.AddWithValue("id", Id);
                 var reader = cmd.ExecuteReader(CommandBehavior.SingleResult);
@@ -816,6 +824,7 @@ namespace qltx.Models
                         nd.sodienthoai = reader.GetString(3);
                         nd.gioitinh = reader.GetString(4);
                         nd.id = reader.GetString(5);
+                        nd.password= reader.GetString(6);
                     }
                 }
             }
@@ -838,7 +847,19 @@ namespace qltx.Models
                 return (cmd.ExecuteNonQuery());
             }
         }
-
+        public int cnmk(string id,string mkc,string mk)
+        {
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                var str = "update nguoidung set password=@ps where id=@id and password=@psc";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                cmd.Parameters.AddWithValue("ps", mk);
+                cmd.Parameters.AddWithValue("psc", mkc);               
+                cmd.Parameters.AddWithValue("id", id);
+                return (cmd.ExecuteNonQuery());
+            }
+        }
         public List<object> ViewHopDong(string Id)
         {
             List<object> list = new List<object>();
